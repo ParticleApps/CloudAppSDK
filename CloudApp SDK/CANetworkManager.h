@@ -8,16 +8,31 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const accountExtension;
+extern NSString *const statisticsExtension;
+extern NSString *const registerExtension;
+extern NSString *const resetPasswordExtension;
+
 @interface CANetworkManager : NSObject
 
 @property (nonatomic) NSURLCredential *userCredential;
 
 + (instancetype)sharedInstance;
 
-+ (NSURLCredential *)credentialForUsername:(NSString *)username password:(NSString *)password;
++ (NSURL *)urlWithExtension:(NSString *)extension;
+
++ (NSURLCredential *)credentialForEmail:(NSString *)email password:(NSString *)password;
 
 - (void)getRequestWithURL:(NSURL *)url completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion;
 
 - (void)getRequestWithURL:(NSURL *)url delegate:(id<NSURLSessionDelegate>)delegate completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion;
+
+- (void)putRequestWithURL:(NSURL *)url body:(NSDictionary *)jsonBody completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion;
+
+- (void)putRequestWithURL:(NSURL *)url body:(NSDictionary *)jsonBody delegate:(id<NSURLSessionDelegate>)delegate completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion;
+
+- (void)postRequestWithURL:(NSURL *)url body:(NSDictionary *)jsonBody completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion;
+
+- (void)postRequestWithURL:(NSURL *)url body:(NSDictionary *)jsonBody delegate:(id<NSURLSessionDelegate>)delegate completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion;
 
 @end

@@ -8,6 +8,11 @@
 
 #import "CANetworkManager.h"
 
+NSString *const accountExtension       = @"account";
+NSString *const statisticsExtension    = @"stats";
+NSString *const registerExtension      = @"register";
+NSString *const resetPasswordExtension = @"reset";
+
 @interface CANetworkManager () <NSURLSessionDelegate>
 @end
 
@@ -26,8 +31,12 @@
 
 #pragma mark - Class Methods
 
-+ (NSURLCredential *)credentialForUsername:(NSString *)username password:(NSString *)password {
-    return [NSURLCredential credentialWithUser:username password:password persistence:NSURLCredentialPersistencePermanent];
++ (NSURLCredential *)credentialForEmail:(NSString *)email password:(NSString *)password {
+    return [NSURLCredential credentialWithUser:email password:password persistence:NSURLCredentialPersistencePermanent];
+}
+
++ (NSURL *)urlWithExtension:(NSString *)extension {
+    return [NSURL URLWithString:[NSString stringWithFormat:@"http://my.cl.ly/%@", extension]];
 }
 
 #pragma mark - Actions
@@ -42,6 +51,46 @@
     NSMutableURLRequest *request             = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
     
     [request setHTTPMethod:@"GET"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:completion];
+    [task resume];
+}
+
+- (void)putRequestWithURL:(NSURL *)url body:(NSDictionary *)jsonBody completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion {
+    [self putRequestWithURL:url body:jsonBody delegate:self completion:completion];
+}
+
+- (void)putRequestWithURL:(NSURL *)url body:(NSDictionary *)jsonBody delegate:(id<NSURLSessionDelegate>)delegate completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion {
+    NSError *serializationError              = nil;
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session                    = [NSURLSession sessionWithConfiguration:configuration delegate:delegate delegateQueue:nil];
+    NSMutableURLRequest *request             = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+    NSData *body                             = [NSJSONSerialization dataWithJSONObject:jsonBody options:(NSJSONWritingOptions)0 error:&serializationError];
+    
+    [request setHTTPBody:body];
+    [request setHTTPMethod:@"PUT"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:completion];
+    [task resume];
+}
+
+- (void)postRequestWithURL:(NSURL *)url body:(NSDictionary *)jsonBody completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion {
+    [self postRequestWithURL:url body:jsonBody delegate:self completion:completion];
+}
+
+- (void)postRequestWithURL:(NSURL *)url body:(NSDictionary *)jsonBody delegate:(id<NSURLSessionDelegate>)delegate completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion {
+    NSError *serializationError              = nil;
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session                    = [NSURLSession sessionWithConfiguration:configuration delegate:delegate delegateQueue:nil];
+    NSMutableURLRequest *request             = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+    NSData *body                             = [NSJSONSerialization dataWithJSONObject:jsonBody options:(NSJSONWritingOptions)0 error:&serializationError];
+    
+    [request setHTTPBody:body];
+    [request setHTTPMethod:@"POST"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     
@@ -66,6 +115,5 @@
         completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, nil);
     }
 }
-
 
 @end

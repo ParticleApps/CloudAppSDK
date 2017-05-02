@@ -16,8 +16,23 @@
 
 + (instancetype)sharedInstance;
 
-- (void)loginWithUsername:(NSString *)username password:(NSString *)password success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure;
+//Actions
+- (void)registerWithEmail:(NSString *)email password:(NSString *)password acceptsToS:(BOOL)tos success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure;
 
+- (void)loginWithEmail:(NSString *)email password:(NSString *)password success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure;
+
+- (void)requestPasswordResetWithSuccess:(void (^)())success failure:(void (^)(NSError *error))failure;
+
+//Getters
 - (void)fetchStatisticsWithSuccess:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure;
+
+//Setters
+- (void)setHasPrivateItems:(BOOL)privateItems success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure;
+
+- (void)setCustomDomain:(NSString *)domain homepage:(NSString *)homepage success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure;
+
+- (void)setPassword:(NSString *)newPassword currentPassword:(NSString *)oldPassword success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure;
+
+- (void)setEmail:(NSString *)email currentPassword:(NSString *)oldPassword success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure;
 
 @end

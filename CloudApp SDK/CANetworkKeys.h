@@ -24,5 +24,9 @@ static NSString *const kUpdatedAt = @"updated_at";
 static NSString *const kActivatedAt = @"activated_at";
 static NSString *const kItems = @"items";
 static NSString *const kViews = @"views";
+static NSString *const kAcceptTOS = @"accept_tos";
+static NSString *const kPassword = @"password";
+static NSString *const kCurrnetPassword = @"current_password";
+static NSString *const kUser = @"user";
 
 #endif /* CANetworkKeys_h */
