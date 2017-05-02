@@ -1,0 +1,378 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		843630C11EB806FF0067EE0A /* CloudAppSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 843630BF1EB806FF0067EE0A /* CloudAppSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		843630F21EB818F60067EE0A /* CAUserManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 843630F01EB818F60067EE0A /* CAUserManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		843630F31EB818F60067EE0A /* CAUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 843630F11EB818F60067EE0A /* CAUserManager.m */; };
+		847F2D341EB83B02006707A5 /* CAUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 847F2D321EB83B02006707A5 /* CAUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		847F2D351EB83B02006707A5 /* CAUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 847F2D331EB83B02006707A5 /* CAUser.m */; };
+		847F2D381EB83B42006707A5 /* CAObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 847F2D361EB83B42006707A5 /* CAObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		847F2D391EB83B42006707A5 /* CAObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 847F2D371EB83B42006707A5 /* CAObject.m */; };
+		847F2D3F1EB849C7006707A5 /* NSDate+CAExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 847F2D3D1EB849C7006707A5 /* NSDate+CAExtensions.h */; };
+		847F2D401EB849C7006707A5 /* NSDate+CAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 847F2D3E1EB849C7006707A5 /* NSDate+CAExtensions.m */; };
+		847F2D4B1EB856EF006707A5 /* CANetworkManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 847F2D491EB856EF006707A5 /* CANetworkManager.h */; };
+		847F2D4C1EB856EF006707A5 /* CANetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 847F2D4A1EB856EF006707A5 /* CANetworkManager.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		843630BC1EB806FF0067EE0A /* CloudAppSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CloudAppSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		843630BF1EB806FF0067EE0A /* CloudAppSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CloudAppSDK.h; sourceTree = "<group>"; };
+		843630C01EB806FF0067EE0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		843630F01EB818F60067EE0A /* CAUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAUserManager.h; sourceTree = "<group>"; };
+		843630F11EB818F60067EE0A /* CAUserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAUserManager.m; sourceTree = "<group>"; };
+		847F2D321EB83B02006707A5 /* CAUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAUser.h; sourceTree = "<group>"; };
+		847F2D331EB83B02006707A5 /* CAUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAUser.m; sourceTree = "<group>"; };
+		847F2D361EB83B42006707A5 /* CAObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAObject.h; sourceTree = "<group>"; };
+		847F2D371EB83B42006707A5 /* CAObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAObject.m; sourceTree = "<group>"; };
+		847F2D3B1EB83CD8006707A5 /* CANetworkKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CANetworkKeys.h; sourceTree = "<group>"; };
+		847F2D3D1EB849C7006707A5 /* NSDate+CAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+CAExtensions.h"; sourceTree = "<group>"; };
+		847F2D3E1EB849C7006707A5 /* NSDate+CAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CAExtensions.m"; sourceTree = "<group>"; };
+		847F2D421EB84E7D006707A5 /* CAObjectPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CAObjectPrivate.h; sourceTree = "<group>"; };
+		847F2D431EB84EC2006707A5 /* CAUserPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CAUserPrivate.h; sourceTree = "<group>"; };
+		847F2D491EB856EF006707A5 /* CANetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CANetworkManager.h; sourceTree = "<group>"; };
+		847F2D4A1EB856EF006707A5 /* CANetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CANetworkManager.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		843630B81EB806FF0067EE0A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		843630B21EB806FF0067EE0A = {
+			isa = PBXGroup;
+			children = (
+				843630BE1EB806FF0067EE0A /* CloudApp SDK */,
+				843630BD1EB806FF0067EE0A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		843630BD1EB806FF0067EE0A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				843630BC1EB806FF0067EE0A /* CloudAppSDK.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		843630BE1EB806FF0067EE0A /* CloudApp SDK */ = {
+			isa = PBXGroup;
+			children = (
+				847F2D411EB849DC006707A5 /* Extensions */,
+				847F2D3C1EB83CE4006707A5 /* Managers */,
+				847F2D3A1EB83B46006707A5 /* Model */,
+				843630BF1EB806FF0067EE0A /* CloudAppSDK.h */,
+				847F2D4D1EB85A6A006707A5 /* Supporting Files */,
+			);
+			path = "CloudApp SDK";
+			sourceTree = "<group>";
+		};
+		847F2D3A1EB83B46006707A5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				847F2D421EB84E7D006707A5 /* CAObjectPrivate.h */,
+				847F2D361EB83B42006707A5 /* CAObject.h */,
+				847F2D371EB83B42006707A5 /* CAObject.m */,
+				847F2D431EB84EC2006707A5 /* CAUserPrivate.h */,
+				847F2D321EB83B02006707A5 /* CAUser.h */,
+				847F2D331EB83B02006707A5 /* CAUser.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		847F2D3C1EB83CE4006707A5 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				843630F01EB818F60067EE0A /* CAUserManager.h */,
+				843630F11EB818F60067EE0A /* CAUserManager.m */,
+				847F2D491EB856EF006707A5 /* CANetworkManager.h */,
+				847F2D4A1EB856EF006707A5 /* CANetworkManager.m */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		847F2D411EB849DC006707A5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				847F2D3D1EB849C7006707A5 /* NSDate+CAExtensions.h */,
+				847F2D3E1EB849C7006707A5 /* NSDate+CAExtensions.m */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		847F2D4D1EB85A6A006707A5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				847F2D3B1EB83CD8006707A5 /* CANetworkKeys.h */,
+				843630C01EB806FF0067EE0A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		843630B91EB806FF0067EE0A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				847F2D341EB83B02006707A5 /* CAUser.h in Headers */,
+				843630C11EB806FF0067EE0A /* CloudAppSDK.h in Headers */,
+				847F2D4B1EB856EF006707A5 /* CANetworkManager.h in Headers */,
+				843630F21EB818F60067EE0A /* CAUserManager.h in Headers */,
+				847F2D381EB83B42006707A5 /* CAObject.h in Headers */,
+				847F2D3F1EB849C7006707A5 /* NSDate+CAExtensions.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		843630BB1EB806FF0067EE0A /* CloudApp SDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 843630C41EB806FF0067EE0A /* Build configuration list for PBXNativeTarget "CloudApp SDK" */;
+			buildPhases = (
+				843630B71EB806FF0067EE0A /* Sources */,
+				843630B81EB806FF0067EE0A /* Frameworks */,
+				843630B91EB806FF0067EE0A /* Headers */,
+				843630BA1EB806FF0067EE0A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CloudApp SDK";
+			productName = "CloudApp SDK";
+			productReference = 843630BC1EB806FF0067EE0A /* CloudAppSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		843630B31EB806FF0067EE0A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = CA;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "Rocco Del Priore";
+				TargetAttributes = {
+					843630BB1EB806FF0067EE0A = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 7GFV5Z2W8L;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 843630B61EB806FF0067EE0A /* Build configuration list for PBXProject "CloudApp SDK" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 843630B21EB806FF0067EE0A;
+			productRefGroup = 843630BD1EB806FF0067EE0A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				843630BB1EB806FF0067EE0A /* CloudApp SDK */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		843630BA1EB806FF0067EE0A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		843630B71EB806FF0067EE0A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				847F2D351EB83B02006707A5 /* CAUser.m in Sources */,
+				847F2D4C1EB856EF006707A5 /* CANetworkManager.m in Sources */,
+				843630F31EB818F60067EE0A /* CAUserManager.m in Sources */,
+				847F2D401EB849C7006707A5 /* NSDate+CAExtensions.m in Sources */,
+				847F2D391EB83B42006707A5 /* CAObject.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		843630C21EB806FF0067EE0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		843630C31EB806FF0067EE0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		843630C51EB806FF0067EE0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 7GFV5Z2W8L;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "CloudApp SDK/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "particle.CloudApp-SDK";
+				PRODUCT_NAME = CloudAppSDK;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		843630C61EB806FF0067EE0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 7GFV5Z2W8L;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "CloudApp SDK/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "particle.CloudApp-SDK";
+				PRODUCT_NAME = CloudAppSDK;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		843630B61EB806FF0067EE0A /* Build configuration list for PBXProject "CloudApp SDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				843630C21EB806FF0067EE0A /* Debug */,
+				843630C31EB806FF0067EE0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		843630C41EB806FF0067EE0A /* Build configuration list for PBXNativeTarget "CloudApp SDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				843630C51EB806FF0067EE0A /* Debug */,
+				843630C61EB806FF0067EE0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 843630B31EB806FF0067EE0A /* Project object */;
+}
