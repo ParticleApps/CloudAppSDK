@@ -18,6 +18,10 @@
 		847F2D401EB849C7006707A5 /* NSDate+CAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 847F2D3E1EB849C7006707A5 /* NSDate+CAExtensions.m */; };
 		847F2D4B1EB856EF006707A5 /* CANetworkManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 847F2D491EB856EF006707A5 /* CANetworkManager.h */; };
 		847F2D4C1EB856EF006707A5 /* CANetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 847F2D4A1EB856EF006707A5 /* CANetworkManager.m */; };
+		847F2D501EB870E0006707A5 /* CAAPIManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 847F2D4E1EB870E0006707A5 /* CAAPIManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		847F2D511EB870E0006707A5 /* CAAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 847F2D4F1EB870E0006707A5 /* CAAPIManager.m */; };
+		847F2D541EB87291006707A5 /* CAItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 847F2D521EB87291006707A5 /* CAItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		847F2D551EB87291006707A5 /* CAItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 847F2D531EB87291006707A5 /* CAItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +41,11 @@
 		847F2D431EB84EC2006707A5 /* CAUserPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CAUserPrivate.h; sourceTree = "<group>"; };
 		847F2D491EB856EF006707A5 /* CANetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CANetworkManager.h; sourceTree = "<group>"; };
 		847F2D4A1EB856EF006707A5 /* CANetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CANetworkManager.m; sourceTree = "<group>"; };
+		847F2D4E1EB870E0006707A5 /* CAAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAAPIManager.h; sourceTree = "<group>"; };
+		847F2D4F1EB870E0006707A5 /* CAAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAAPIManager.m; sourceTree = "<group>"; };
+		847F2D521EB87291006707A5 /* CAItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAItem.h; sourceTree = "<group>"; };
+		847F2D531EB87291006707A5 /* CAItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAItem.m; sourceTree = "<group>"; };
+		847F2D5A1EB9748E006707A5 /* CAItemPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CAItemPrivate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +96,9 @@
 				847F2D431EB84EC2006707A5 /* CAUserPrivate.h */,
 				847F2D321EB83B02006707A5 /* CAUser.h */,
 				847F2D331EB83B02006707A5 /* CAUser.m */,
+				847F2D5A1EB9748E006707A5 /* CAItemPrivate.h */,
+				847F2D521EB87291006707A5 /* CAItem.h */,
+				847F2D531EB87291006707A5 /* CAItem.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -96,6 +108,8 @@
 			children = (
 				843630F01EB818F60067EE0A /* CAUserManager.h */,
 				843630F11EB818F60067EE0A /* CAUserManager.m */,
+				847F2D4E1EB870E0006707A5 /* CAAPIManager.h */,
+				847F2D4F1EB870E0006707A5 /* CAAPIManager.m */,
 				847F2D491EB856EF006707A5 /* CANetworkManager.h */,
 				847F2D4A1EB856EF006707A5 /* CANetworkManager.m */,
 			);
@@ -128,10 +142,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				847F2D341EB83B02006707A5 /* CAUser.h in Headers */,
+				847F2D541EB87291006707A5 /* CAItem.h in Headers */,
 				843630C11EB806FF0067EE0A /* CloudAppSDK.h in Headers */,
 				847F2D4B1EB856EF006707A5 /* CANetworkManager.h in Headers */,
 				843630F21EB818F60067EE0A /* CAUserManager.h in Headers */,
 				847F2D381EB83B42006707A5 /* CAObject.h in Headers */,
+				847F2D501EB870E0006707A5 /* CAAPIManager.h in Headers */,
 				847F2D3F1EB849C7006707A5 /* NSDate+CAExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,9 +223,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				847F2D351EB83B02006707A5 /* CAUser.m in Sources */,
+				847F2D551EB87291006707A5 /* CAItem.m in Sources */,
 				847F2D4C1EB856EF006707A5 /* CANetworkManager.m in Sources */,
 				843630F31EB818F60067EE0A /* CAUserManager.m in Sources */,
 				847F2D401EB849C7006707A5 /* NSDate+CAExtensions.m in Sources */,
+				847F2D511EB870E0006707A5 /* CAAPIManager.m in Sources */,
 				847F2D391EB83B42006707A5 /* CAObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,5 +17,6 @@ FOUNDATION_EXPORT const unsigned char CloudApp_SDKVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <CloudApp_SDK/PublicHeader.h>
 
 #import "CAUserManager.h"
+#import "CAAPIManager.h"
 
 

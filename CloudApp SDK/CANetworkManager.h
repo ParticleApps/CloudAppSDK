@@ -12,6 +12,7 @@ extern NSString *const accountExtension;
 extern NSString *const statisticsExtension;
 extern NSString *const registerExtension;
 extern NSString *const resetPasswordExtension;
+extern NSString *const itemsExtension;
 
 @interface CANetworkManager : NSObject
 
@@ -20,6 +21,8 @@ extern NSString *const resetPasswordExtension;
 + (instancetype)sharedInstance;
 
 + (NSURL *)urlWithExtension:(NSString *)extension;
+
++ (NSURL *)urlWithExtension:(NSString *)extension parameters:(NSDictionary *)parameters;
 
 + (NSURLCredential *)credentialForEmail:(NSString *)email password:(NSString *)password;
 

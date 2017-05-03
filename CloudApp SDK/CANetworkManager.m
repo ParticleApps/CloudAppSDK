@@ -12,6 +12,7 @@ NSString *const accountExtension       = @"account";
 NSString *const statisticsExtension    = @"stats";
 NSString *const registerExtension      = @"register";
 NSString *const resetPasswordExtension = @"reset";
+NSString *const itemsExtension         = @"items";
 
 @interface CANetworkManager () <NSURLSessionDelegate>
 @end
@@ -37,6 +38,28 @@ NSString *const resetPasswordExtension = @"reset";
 
 + (NSURL *)urlWithExtension:(NSString *)extension {
     return [NSURL URLWithString:[NSString stringWithFormat:@"http://my.cl.ly/%@", extension]];
+}
+
++ (NSURL *)urlWithExtension:(NSString *)extension parameters:(NSDictionary *)parameters {
+    NSURLComponents *components = [[NSURLComponents alloc] initWithURL:[CANetworkManager urlWithExtension:extension] resolvingAgainstBaseURL:NO];
+    NSMutableArray *queryItems = [NSMutableArray arrayWithArray:components.queryItems];
+    for (id parameter in parameters.allKeys) {
+        id key = parameter;
+        id value = parameters[key];
+        
+        if (![key isKindOfClass:[NSString class]]) {
+            key = [key stringValue];
+        }
+        if (![value isKindOfClass:[NSString class]]) {
+            value = [value stringValue];
+        }
+        
+        NSURLQueryItem *queryItem = [[NSURLQueryItem alloc] initWithName:key value:value];
+        [queryItems addObject:queryItem];
+    }
+    [components setQueryItems:queryItems];
+    
+    return components.URL;
 }
 
 #pragma mark - Actions

@@ -21,6 +21,8 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
+        dictionary = [self preprocessDictionary:dictionary];
+        
         self.uniqueId  = [dictionary[kUniqueId] integerValue];
         self.createdAt = [NSDate dateFromISO8601String:dictionary[kCreatedAt]];
         
@@ -40,6 +42,23 @@
     }
     
     return updated;
+}
+
+- (NSDictionary *)preprocessDictionary:(NSDictionary *)dictionary {
+    NSMutableDictionary *mutableDictioanry = [NSMutableDictionary dictionaryWithDictionary:dictionary];
+    for (NSString *key in dictionary.allKeys) {
+        id value = mutableDictioanry[key];
+        if ([value isKindOfClass:[NSNull class]]) {
+            [mutableDictioanry setValue:@"" forKey:key];
+        }
+        else if ([value isKindOfClass:[NSString class]]) {
+            if ([value isEqualToString:@"<null>"]) {
+                [mutableDictioanry setValue:@"" forKey:key];
+            }
+        }
+    }
+    
+    return mutableDictioanry;
 }
 
 @end

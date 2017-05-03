@@ -28,5 +28,21 @@ static NSString *const kAcceptTOS = @"accept_tos";
 static NSString *const kPassword = @"password";
 static NSString *const kCurrnetPassword = @"current_password";
 static NSString *const kUser = @"user";
+static NSString *const kPage = @"page";
+static NSString *const kItemsPerPage = @"per_page";
+static NSString *const kType = @"type";
+static NSString *const kDeleted = @"deleted";
+static NSString *const kSource = @"source";
+static NSString *const kHref = @"href";
+static NSString *const kName = @"name";
+static NSString *const kPrivate = @"private";
+static NSString *const kURL = @"url";
+static NSString *const kContentURL = @"content_url";
+static NSString *const kItemType = @"item_type";
+static NSString *const kViewCounter = @"view_counter";
+static NSString *const kIcon = @"icon";
+static NSString *const kRemoteURL = @"remote_url";
+static NSString *const kRedirectURL = @"redirect_url";
+static NSString *const kDeletedAt = @"deleted_at";
 
 #endif /* CANetworkKeys_h */

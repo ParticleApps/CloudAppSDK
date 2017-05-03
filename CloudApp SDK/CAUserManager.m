@@ -29,36 +29,30 @@
     return instance;
 }
 
-#pragma mark - Actions
+#pragma mark - Handlers
 
-- (void)registerWithEmail:(NSString *)email password:(NSString *)password acceptsToS:(BOOL)tos success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {
-    [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager urlWithExtension:registerExtension]
-                                                     body:@{kUser: @{kEmail : email, kPassword:password, kAcceptTOS:@(tos)}}
-                                                 delegate:self completion:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                     CAUser *user = nil;
-                                                     if (data != nil) {
-                                                         id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:NULL];
-                                                         if ([object isKindOfClass:[NSDictionary class]]) {
-                                                             user = [[CAUser alloc] initWithDictionary:(NSDictionary *)object];
-                                                             self.currentUser = user;
-                                                         }
-                                                     }
-                                                     
-                                                     if (user && success) {
-                                                         self.credential = [CANetworkManager credentialForEmail:email password:password];
-                                                         [[CANetworkManager sharedInstance] setUserCredential:self.credential];
-                                                         success(self.currentUser);
-                                                     }
-                                                     else if (failure) {
-                                                         self.credential = nil;
-                                                         failure(error);
-                                                     }
-                                                 }];
+- (void (^)(NSData *data, NSURLResponse *response, NSError *error))completionBlockForCurrentUserWithSuccess:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {
+    return ^(NSData *data, NSURLResponse *response, NSError *error) {
+        BOOL hasSuccess = false;
+        if (data != nil) {
+            id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:NULL];
+            if ([object isKindOfClass:[NSDictionary class]]) {
+                [self.currentUser updateWithDictionary:(NSDictionary *)object];
+                hasSuccess = true;
+            }
+        }
+        
+        if (hasSuccess && success) {
+            success(self.currentUser);
+        }
+        else if (failure) {
+            failure(error);
+        }
+    };
 }
 
-- (void)loginWithEmail:(NSString *)email password:(NSString *)password success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {
-    self.credential = [CANetworkManager credentialForEmail:email password:password];
-    [[CANetworkManager sharedInstance] getRequestWithURL:[CANetworkManager urlWithExtension:accountExtension] delegate:self completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+- (void (^)(NSData *data, NSURLResponse *response, NSError *error))completionBlockForNewUserWithSuccess:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {
+    return ^(NSData *data, NSURLResponse *response, NSError *error) {
         CAUser *user = nil;
         if (data != nil) {
             id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:NULL];
@@ -76,22 +70,10 @@
             self.credential = nil;
             failure(error);
         }
-    }];
+    };
 }
 
-- (void)requestPasswordResetWithSuccess:(void (^)())success failure:(void (^)(NSError *error))failure {
-    CAUser *user = [[CAUserManager sharedInstance] currentUser];
-    [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager urlWithExtension:resetPasswordExtension]
-                                                     body:@{kUser:@{kEmail:user.email}}
-                                               completion:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                   if (error && failure) {
-                                                       failure(error);
-                                                   }
-                                                   else if (!error && success) {
-                                                       success();
-                                                   }
-                                               }];
-}
+#pragma mark - Fetch
 
 - (void)fetchStatisticsWithSuccess:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {
     [[CANetworkManager sharedInstance] getRequestWithURL:[CANetworkManager urlWithExtension:statisticsExtension] completion:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -113,91 +95,58 @@
     }];
 }
 
+#pragma mark - Actions
+
+- (void)registerWithEmail:(NSString *)email password:(NSString *)password acceptsToS:(BOOL)tos success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {
+    self.credential = [CANetworkManager credentialForEmail:email password:password];
+    [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager urlWithExtension:registerExtension]
+                                                     body:@{kUser: @{kEmail : email, kPassword:password, kAcceptTOS:@(tos)}}
+                                                 delegate:self
+                                               completion:[self completionBlockForNewUserWithSuccess:success failure:failure]];}
+
+- (void)loginWithEmail:(NSString *)email password:(NSString *)password success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {
+    self.credential = [CANetworkManager credentialForEmail:email password:password];
+    [[CANetworkManager sharedInstance] getRequestWithURL:[CANetworkManager urlWithExtension:accountExtension]
+                                                delegate:self
+                                              completion:[self completionBlockForNewUserWithSuccess:success failure:failure]];
+}
+
+- (void)requestPasswordResetWithSuccess:(void (^)())success failure:(void (^)(NSError *error))failure {
+    CAUser *user = [[CAUserManager sharedInstance] currentUser];
+    [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager urlWithExtension:resetPasswordExtension]
+                                                     body:@{kUser:@{kEmail:user.email}}
+                                               completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                   if (error && failure) {
+                                                       failure(error);
+                                                   }
+                                                   else if (!error && success) {
+                                                       success();
+                                                   }
+                                               }];
+}
+
 - (void)setHasPrivateItems:(BOOL)privateItems success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {
     [[CANetworkManager sharedInstance] putRequestWithURL:[CANetworkManager urlWithExtension:accountExtension]
                                                     body:@{kUser:@{kPrivateItems:@(privateItems)}}
-                                              completion:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                  BOOL hasSuccess = false;
-                                                  if (data != nil) {
-                                                      id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:NULL];
-                                                      if ([object isKindOfClass:[NSDictionary class]]) {
-                                                          [self.currentUser updateWithDictionary:(NSDictionary *)object];
-                                                          hasSuccess = true;
-                                                      }
-                                                  }
-                                                  
-                                                  if (hasSuccess && success) {
-                                                      success(self.currentUser);
-                                                  }
-                                                  else if (failure) {
-                                                      failure(error);
-                                                  }
-                                              }];
+                                              completion:[self completionBlockForCurrentUserWithSuccess:success failure:failure]];
 }
 
 - (void)setCustomDomain:(NSString *)domain homepage:(NSString *)homepage success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {
-    NSDictionary *body = @{kUser: @{kDomain:domain, kDomainHomePage:homepage}};
-    [[CANetworkManager sharedInstance] putRequestWithURL:[CANetworkManager urlWithExtension:accountExtension] body:body completion:^(NSData *data, NSURLResponse *response, NSError *error) {
-        BOOL hasSuccess = false;
-        if (data != nil) {
-            id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:NULL];
-            if ([object isKindOfClass:[NSDictionary class]]) {
-                [self.currentUser updateWithDictionary:(NSDictionary *)object];
-                hasSuccess = true;
-            }
-        }
-        
-        if (hasSuccess && success) {
-            success(self.currentUser);
-        }
-        else if (failure) {
-            failure(error);
-        }
-    }];
+    [[CANetworkManager sharedInstance] putRequestWithURL:[CANetworkManager urlWithExtension:accountExtension]
+                                                    body:@{kUser: @{kDomain:domain, kDomainHomePage:homepage}}
+                                              completion:[self completionBlockForCurrentUserWithSuccess:success failure:failure]];
 }
 
 - (void)setPassword:(NSString *)newPassword currentPassword:(NSString *)oldPassword success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {
     [[CANetworkManager sharedInstance] putRequestWithURL:[CANetworkManager urlWithExtension:accountExtension]
                                                     body:@{kUser:@{kPassword:newPassword, kCurrnetPassword:oldPassword}}
-                                              completion:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                  BOOL hasSuccess = false;
-                                                  if (data != nil) {
-                                                      id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:NULL];
-                                                      if ([object isKindOfClass:[NSDictionary class]]) {
-                                                          [self.currentUser updateWithDictionary:(NSDictionary *)object];
-                                                          hasSuccess = true;
-                                                      }
-                                                  }
-                                                  
-                                                  if (hasSuccess && success) {
-                                                      success(self.currentUser);
-                                                  }
-                                                  else if (failure) {
-                                                      failure(error);
-                                                  }
-    }];
+                                              completion:[self completionBlockForCurrentUserWithSuccess:success failure:failure]];
 }
 
 - (void)setEmail:(NSString *)email currentPassword:(NSString *)oldPassword success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {
     [[CANetworkManager sharedInstance] putRequestWithURL:[CANetworkManager urlWithExtension:accountExtension]
                                                     body:@{kUser:@{kEmail:email, kCurrnetPassword:oldPassword}}
-                                              completion:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                  BOOL hasSuccess = false;
-                                                  if (data != nil) {
-                                                      id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:NULL];
-                                                      if ([object isKindOfClass:[NSDictionary class]]) {
-                                                          [self.currentUser updateWithDictionary:(NSDictionary *)object];
-                                                          hasSuccess = true;
-                                                      }
-                                                  }
-                                                  
-                                                  if (hasSuccess && success) {
-                                                      success(self.currentUser);
-                                                  }
-                                                  else if (failure) {
-                                                      failure(error);
-                                                  }
-                                              }];
+                                              completion:[self completionBlockForCurrentUserWithSuccess:success failure:failure]];
 }
 
 #pragma mark - NSURLSession Delegate
