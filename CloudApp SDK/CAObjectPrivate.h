@@ -14,6 +14,6 @@
 
 - (BOOL)updateWithDictionary:(NSDictionary *)dictionary;
 
-- (NSDictionary *)preprocessDictionary:(NSDictionary *)dictionary;
+- (NSDictionary *)preprocessedDictionary:(NSDictionary *)dictionary;
 
 @end

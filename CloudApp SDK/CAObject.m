@@ -21,7 +21,7 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
-        dictionary = [self preprocessDictionary:dictionary];
+        dictionary = [self preprocessedDictionary:dictionary];
         
         self.uniqueId  = [dictionary[kUniqueId] integerValue];
         self.createdAt = [NSDate dateFromISO8601String:dictionary[kCreatedAt]];
@@ -32,20 +32,19 @@
 }
 
 - (BOOL)updateWithDictionary:(NSDictionary *)dictionary {
-    //TODO: Check date
-    BOOL updated = true;
-    
-    if (updated) {
-        self.updatedAt = [NSDate dateFromISO8601String:dictionary[kUpdatedAt]];
+    dictionary = [self preprocessedDictionary:dictionary];
+    NSDate *updatedAt = [NSDate dateFromISO8601String:dictionary[kUpdatedAt]];
+    if ([self.updatedAt compare:updatedAt] == NSOrderedDescending || !self.updatedAt) {
+        self.updatedAt = updatedAt;
         
         return true;
     }
-    
-    return updated;
+    return false;
 }
 
-- (NSDictionary *)preprocessDictionary:(NSDictionary *)dictionary {
+- (NSDictionary *)preprocessedDictionary:(NSDictionary *)dictionary {
     NSMutableDictionary *mutableDictioanry = [NSMutableDictionary dictionaryWithDictionary:dictionary];
+    //HACK: Cleaning the dictionary here is probably not great practice
     for (NSString *key in dictionary.allKeys) {
         id value = mutableDictioanry[key];
         if ([value isKindOfClass:[NSNull class]]) {

@@ -32,15 +32,16 @@
     //TODO: Return dynamically once a list of item types is found
     return CAItemTypeImage;
 }
+
 + (NSString *)apiValueForItemType:(CAItemType)type {
     return @"image";
 }
 
-- (NSDictionary *)preprocessDictionary:(NSDictionary *)dictionary {
-    NSMutableDictionary *mutableDictionary = [[super preprocessDictionary:dictionary] mutableCopy];
-    
+- (NSDictionary *)preprocessedDictionary:(NSDictionary *)dictionary {
+    NSMutableDictionary *mutableDictionary = [[super preprocessedDictionary:dictionary] mutableCopy];
     NSURL *url = [NSURL URLWithString:dictionary[kHref]];
     NSInteger uniqueId = [url.lastPathComponent integerValue];
+    
     mutableDictionary[kUniqueId] = @(uniqueId);
     
     return mutableDictionary;
