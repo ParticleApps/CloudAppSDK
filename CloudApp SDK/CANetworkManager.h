@@ -38,4 +38,8 @@ extern NSString *const itemsExtension;
 
 - (void)postRequestWithURL:(NSURL *)url body:(NSDictionary *)jsonBody delegate:(id<NSURLSessionDelegate>)delegate completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion;
 
+- (void)deleteRequestWithURL:(NSURL *)url completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion;
+
+- (void)deleteRequestWithURL:(NSURL *)url delegate:(id<NSURLSessionDelegate>)delegate completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion;
+
 @end

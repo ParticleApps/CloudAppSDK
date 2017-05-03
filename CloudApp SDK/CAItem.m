@@ -10,6 +10,7 @@
 #import "CANetworkKeys.h"
 #import "CAItemPrivate.h"
 #import "CAObjectPrivate.h"
+#import "NSDate+CAExtensions.h"
 
 @interface CAItem ()
 @property (nonatomic) NSString *name;
@@ -61,7 +62,7 @@
         self.remoteURL    = [NSURL URLWithString:dictionary[kRemoteURL]];
         self.redirectURL  = [NSURL URLWithString:dictionary[kRedirectURL]];
         self.source       = dictionary[kSource];
-        self.deteledAt    = dictionary[kDeletedAt];
+        self.deteledAt    = [NSDate dateFromISO8601String:dictionary[kDeletedAt]];
     }
     return changed;
 }

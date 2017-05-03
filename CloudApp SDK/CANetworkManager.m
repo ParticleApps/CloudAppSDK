@@ -14,6 +14,8 @@ NSString *const registerExtension      = @"register";
 NSString *const resetPasswordExtension = @"reset";
 NSString *const itemsExtension         = @"items";
 
+static NSString *const rootURL = @"http://my.cl.ly/";
+
 @interface CANetworkManager () <NSURLSessionDelegate>
 @end
 
@@ -37,14 +39,14 @@ NSString *const itemsExtension         = @"items";
 }
 
 + (NSURL *)urlWithExtension:(NSString *)extension {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"http://my.cl.ly/%@", extension]];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/", rootURL, extension]];
 }
 
 + (NSURL *)urlWithExtension:(NSString *)extension parameters:(NSDictionary *)parameters {
     NSURLComponents *components = [[NSURLComponents alloc] initWithURL:[CANetworkManager urlWithExtension:extension] resolvingAgainstBaseURL:NO];
-    NSMutableArray *queryItems = [NSMutableArray arrayWithArray:components.queryItems];
+    NSMutableArray *queryItems  = [NSMutableArray arrayWithArray:components.queryItems];
     for (id parameter in parameters.allKeys) {
-        id key = parameter;
+        id key   = parameter;
         id value = parameters[key];
         
         if (![key isKindOfClass:[NSString class]]) {
@@ -62,6 +64,28 @@ NSString *const itemsExtension         = @"items";
     return components.URL;
 }
 
++ (NSURLRequest *)requestForURL:(NSURL *)url body:(NSDictionary *)jsonBody method:(NSString *)method {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+    
+    [request setHTTPMethod:method];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    if (jsonBody) {
+        NSError *error = nil;
+        NSData *body   = [NSJSONSerialization dataWithJSONObject:jsonBody options:(NSJSONWritingOptions)0 error:&error];
+        [request setHTTPBody:body];
+    }
+    
+    return request;
+}
+
++ (NSURLSession *)sessionWithDelegate:(id<NSURLSessionDelegate>)delegate {
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session                    = [NSURLSession sessionWithConfiguration:configuration delegate:delegate delegateQueue:nil];
+    return session;
+}
+
 #pragma mark - Actions
 
 - (void)getRequestWithURL:(NSURL *)url completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion {
@@ -69,14 +93,8 @@ NSString *const itemsExtension         = @"items";
 }
 
 - (void)getRequestWithURL:(NSURL *)url delegate:(id<NSURLSessionDelegate>)delegate completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion {
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSURLSession *session                    = [NSURLSession sessionWithConfiguration:configuration delegate:delegate delegateQueue:nil];
-    NSMutableURLRequest *request             = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-    
-    [request setHTTPMethod:@"GET"];
-    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    
+    NSURLSession *session      = [CANetworkManager sessionWithDelegate:delegate];
+    NSURLRequest *request      = [CANetworkManager requestForURL:url body:nil method:@"GET"];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:completion];
     [task resume];
 }
@@ -86,17 +104,8 @@ NSString *const itemsExtension         = @"items";
 }
 
 - (void)putRequestWithURL:(NSURL *)url body:(NSDictionary *)jsonBody delegate:(id<NSURLSessionDelegate>)delegate completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion {
-    NSError *serializationError              = nil;
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSURLSession *session                    = [NSURLSession sessionWithConfiguration:configuration delegate:delegate delegateQueue:nil];
-    NSMutableURLRequest *request             = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-    NSData *body                             = [NSJSONSerialization dataWithJSONObject:jsonBody options:(NSJSONWritingOptions)0 error:&serializationError];
-    
-    [request setHTTPBody:body];
-    [request setHTTPMethod:@"PUT"];
-    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    
+    NSURLSession *session      = [CANetworkManager sessionWithDelegate:delegate];
+    NSURLRequest *request      = [CANetworkManager requestForURL:url body:jsonBody method:@"PUT"];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:completion];
     [task resume];
 }
@@ -106,19 +115,21 @@ NSString *const itemsExtension         = @"items";
 }
 
 - (void)postRequestWithURL:(NSURL *)url body:(NSDictionary *)jsonBody delegate:(id<NSURLSessionDelegate>)delegate completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion {
-    NSError *serializationError              = nil;
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSURLSession *session                    = [NSURLSession sessionWithConfiguration:configuration delegate:delegate delegateQueue:nil];
-    NSMutableURLRequest *request             = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-    NSData *body                             = [NSJSONSerialization dataWithJSONObject:jsonBody options:(NSJSONWritingOptions)0 error:&serializationError];
-    
-    [request setHTTPBody:body];
-    [request setHTTPMethod:@"POST"];
-    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    
+    NSURLSession *session      = [CANetworkManager sessionWithDelegate:delegate];
+    NSURLRequest *request      = [CANetworkManager requestForURL:url body:jsonBody method:@"POST"];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:completion];
     [task resume];
+}
+
+- (void)deleteRequestWithURL:(NSURL *)url delegate:(id<NSURLSessionDelegate>)delegate completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion {
+    NSURLSession *session      = [CANetworkManager sessionWithDelegate:delegate];
+    NSURLRequest *request      = [CANetworkManager requestForURL:url body:nil method:@"DELETE"];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:completion];
+    [task resume];
+}
+
+- (void)deleteRequestWithURL:(NSURL *)url completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion {
+    [self deleteRequestWithURL:url delegate:self completion:completion];
 }
 
 #pragma mark - NSURLSession Delegate
@@ -126,7 +137,8 @@ NSString *const itemsExtension         = @"items";
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler {
     if ([challenge previousFailureCount] == 0) {
         completionHandler(NSURLSessionAuthChallengeUseCredential, self.userCredential);
-    } else {
+    }
+    else {
         completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, nil);
     }
 }
@@ -134,7 +146,8 @@ NSString *const itemsExtension         = @"items";
 - (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * __nullable credential))completionHandler {
     if ([challenge previousFailureCount] == 0) {
         completionHandler(NSURLSessionAuthChallengeUseCredential, self.userCredential);
-    } else {
+    }
+    else {
         completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, nil);
     }
 }
