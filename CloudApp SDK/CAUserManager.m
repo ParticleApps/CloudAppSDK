@@ -42,12 +42,14 @@
             }
         }
         
-        if (hasSuccess && success) {
-            success(self.currentUser);
-        }
-        else if (failure) {
-            failure(error);
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (hasSuccess && success) {
+                success(self.currentUser);
+            }
+            else if (failure) {
+                failure(error);
+            }
+        });
     };
 }
 
@@ -62,14 +64,16 @@
             }
         }
         
-        if (user && success) {
-            [[CANetworkManager sharedInstance] setUserCredential:self.credential];
-            success(self.currentUser);
-        }
-        else if (failure) {
-            self.credential = nil;
-            failure(error);
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (user && success) {
+                [[CANetworkManager sharedInstance] setUserCredential:self.credential];
+                success(self.currentUser);
+            }
+            else if (failure) {
+                self.credential = nil;
+                failure(error);
+            }
+        });
     };
 }
 
@@ -86,12 +90,14 @@
             }
         }
         
-        if (hasSuccess && success) {
-            success(self.currentUser);
-        }
-        else if (failure) {
-            failure(error);
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (hasSuccess && success) {
+                success(self.currentUser);
+            }
+            else if (failure) {
+                failure(error);
+            }
+        });
     }];
 }
 
@@ -116,12 +122,14 @@
     [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager urlWithExtension:resetPasswordExtension]
                                                      body:@{kUser:@{kEmail:user.email}}
                                                completion:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                   if (error && failure) {
-                                                       failure(error);
-                                                   }
-                                                   else if (!error && success) {
-                                                       success();
-                                                   }
+                                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                                       if (error && failure) {
+                                                           failure(error);
+                                                       }
+                                                       else if (!error && success) {
+                                                           success();
+                                                       }
+                                                   });
                                                }];
 }
 

@@ -57,12 +57,14 @@ NSString *const bookmarkURLKey  = @"redirect_url";
             }
         }
         
-        if (items && success) {
-            success(items);
-        }
-        else if (!items && failure) {
-            failure(error);
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (items && success) {
+                success(items);
+            }
+            else if (!items && failure) {
+                failure(error);
+            }
+        });
     };
 }
 
@@ -76,12 +78,14 @@ NSString *const bookmarkURLKey  = @"redirect_url";
             }
         }
         
-        if (item && success) {
-            success(item);
-        }
-        else if (!item && failure) {
-            failure(error);
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (item && success) {
+                success(item);
+            }
+            else if (!item && failure) {
+                failure(error);
+            }
+        });
     };
 }
 
@@ -96,12 +100,14 @@ NSString *const bookmarkURLKey  = @"redirect_url";
             }
         }
         
-        if (successful && success) {
-            success(item);
-        }
-        else if (!successful && failure) {
-            failure(error);
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (successful && success) {
+                success(item);
+            }
+            else if (!successful && failure) {
+                failure(error);
+            }
+        });
     };
 }
 
@@ -150,12 +156,14 @@ NSString *const bookmarkURLKey  = @"redirect_url";
                                                       }
                                                   }
                                                   
-                                                  if (homePage && success) {
-                                                      success(homePage);
-                                                  }
-                                                  else if (!homePage && failure) {
-                                                      failure(error);
-                                                  }
+                                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                                      if (homePage && success) {
+                                                          success(homePage);
+                                                      }
+                                                      else if (!homePage && failure) {
+                                                          failure(error);
+                                                      }
+                                                  });
                                               }];
 }
 
