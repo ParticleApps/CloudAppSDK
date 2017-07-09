@@ -46,5 +46,8 @@ static NSString *const kRedirectURL                = @"redirect_url";
 static NSString *const kDeletedAt                  = @"deleted_at";
 static NSString *const kItem                       = @"item";
 static NSString *const kHomePage                   = @"home_page";
+static NSString *const kParams                     = @"params";
+static NSString *const kFile                       = @"file";
+static NSString *const kS3                         = @"s3";
 
 #endif /* CANetworkKeys_h */

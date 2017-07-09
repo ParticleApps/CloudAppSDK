@@ -6,6 +6,9 @@
 //  Copyright © 2017 Rocco Del Priore. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+
 #import "CANetworkManager.h"
 
 NSString *const accountExtension       = @"account";
@@ -13,8 +16,9 @@ NSString *const statisticsExtension    = @"stats";
 NSString *const registerExtension      = @"register";
 NSString *const resetPasswordExtension = @"reset";
 NSString *const itemsExtension         = @"items";
+NSString *const newItemExtension       = @"v3/items";
 
-static NSString *const rootURL = @"http://my.cl.ly/";
+static NSString *const rootURL = @"https://my.cl.ly/";
 
 @interface CANetworkManager () <NSURLSessionDelegate>
 @end
@@ -150,6 +154,70 @@ static NSString *const rootURL = @"http://my.cl.ly/";
     else {
         completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, nil);
     }
+}
+
+#pragma mark - Multipart Requests
+
+- (NSString *)mimeTypeForPath:(NSString *)path {
+    CFStringRef extension = (__bridge CFStringRef)[path pathExtension];
+    CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, extension, NULL);
+    assert(UTI != NULL);
+    
+    NSString *mimetype = CFBridgingRelease(UTTypeCopyPreferredTagWithClass(UTI, kUTTagClassMIMEType));
+    assert(mimetype != NULL);
+    
+    CFRelease(UTI);
+    
+    return mimetype;
+}
+
+
+- (NSData *)createBodyWithBoundary:(NSString *)boundary
+                        parameters:(NSDictionary *)parameters
+                             paths:(NSArray *)paths
+                         fieldName:(NSString *)fieldName {
+    NSMutableData *httpBody = [NSMutableData data];
+    
+    //Add params
+    [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *parameterKey, NSString *parameterValue, BOOL *stop) {
+        [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", parameterKey] dataUsingEncoding:NSUTF8StringEncoding]];
+        [httpBody appendData:[[NSString stringWithFormat:@"%@\r\n", parameterValue] dataUsingEncoding:NSUTF8StringEncoding]];
+    }];
+    
+    //Add file data
+    for (NSString *path in paths) {
+        NSString *filename  = [path lastPathComponent];
+        NSData   *data      = [NSData dataWithContentsOfFile:path];
+        NSString *mimetype  = [self mimeTypeForPath:path];
+        
+        [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", fieldName, filename] dataUsingEncoding:NSUTF8StringEncoding]];
+        [httpBody appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", mimetype] dataUsingEncoding:NSUTF8StringEncoding]];
+        [httpBody appendData:data];
+        [httpBody appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    [httpBody appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    return httpBody;
+}
+
+- (void)multiPartPostRequestWithURL:(NSURL *)url body:(NSDictionary *)jsonBody path:(NSString *)path completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion {
+    //Create Varaibles
+    NSString *boundary           = [NSString stringWithFormat:@"Boundary-%@", [[NSUUID UUID] UUIDString]];
+    NSString *contentType        = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
+    NSData *httpBody             = [self createBodyWithBoundary:boundary parameters:jsonBody paths:@[path] fieldName:@"file"];
+    NSURLSession *session        = [CANetworkManager sessionWithDelegate:self];
+    NSMutableURLRequest *request = [[CANetworkManager requestForURL:url body:nil method:@"POST"] mutableCopy];
+    
+    //Set properties
+    [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
+    [request setHTTPBody:httpBody];
+    
+    //Execute Request
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:completion];
+    [task resume];
 }
 
 @end
