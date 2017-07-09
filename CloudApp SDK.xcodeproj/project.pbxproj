@@ -10,6 +10,8 @@
 		843630C11EB806FF0067EE0A /* CloudAppSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 843630BF1EB806FF0067EE0A /* CloudAppSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		843630F21EB818F60067EE0A /* CAUserManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 843630F01EB818F60067EE0A /* CAUserManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		843630F31EB818F60067EE0A /* CAUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 843630F11EB818F60067EE0A /* CAUserManager.m */; };
+		843B5FBA1EB9BDE800E01EEF /* CAUploader.h in Headers */ = {isa = PBXBuildFile; fileRef = 843B5FB81EB9BDE800E01EEF /* CAUploader.h */; };
+		843B5FBB1EB9BDE800E01EEF /* CAUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 843B5FB91EB9BDE800E01EEF /* CAUploader.m */; };
 		847F2D341EB83B02006707A5 /* CAUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 847F2D321EB83B02006707A5 /* CAUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		847F2D351EB83B02006707A5 /* CAUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 847F2D331EB83B02006707A5 /* CAUser.m */; };
 		847F2D381EB83B42006707A5 /* CAObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 847F2D361EB83B42006707A5 /* CAObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,6 +32,8 @@
 		843630C01EB806FF0067EE0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		843630F01EB818F60067EE0A /* CAUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAUserManager.h; sourceTree = "<group>"; };
 		843630F11EB818F60067EE0A /* CAUserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAUserManager.m; sourceTree = "<group>"; };
+		843B5FB81EB9BDE800E01EEF /* CAUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAUploader.h; sourceTree = "<group>"; };
+		843B5FB91EB9BDE800E01EEF /* CAUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAUploader.m; sourceTree = "<group>"; };
 		847F2D321EB83B02006707A5 /* CAUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAUser.h; sourceTree = "<group>"; };
 		847F2D331EB83B02006707A5 /* CAUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAUser.m; sourceTree = "<group>"; };
 		847F2D361EB83B42006707A5 /* CAObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAObject.h; sourceTree = "<group>"; };
@@ -83,6 +87,8 @@
 				847F2D3A1EB83B46006707A5 /* Model */,
 				843630BF1EB806FF0067EE0A /* CloudAppSDK.h */,
 				847F2D4D1EB85A6A006707A5 /* Supporting Files */,
+				843B5FB81EB9BDE800E01EEF /* CAUploader.h */,
+				843B5FB91EB9BDE800E01EEF /* CAUploader.m */,
 			);
 			path = "CloudApp SDK";
 			sourceTree = "<group>";
@@ -145,6 +151,7 @@
 				847F2D541EB87291006707A5 /* CAItem.h in Headers */,
 				843630C11EB806FF0067EE0A /* CloudAppSDK.h in Headers */,
 				847F2D4B1EB856EF006707A5 /* CANetworkManager.h in Headers */,
+				843B5FBA1EB9BDE800E01EEF /* CAUploader.h in Headers */,
 				843630F21EB818F60067EE0A /* CAUserManager.h in Headers */,
 				847F2D381EB83B42006707A5 /* CAObject.h in Headers */,
 				847F2D501EB870E0006707A5 /* CAAPIManager.h in Headers */,
@@ -229,6 +236,7 @@
 				847F2D401EB849C7006707A5 /* NSDate+CAExtensions.m in Sources */,
 				847F2D511EB870E0006707A5 /* CAAPIManager.m in Sources */,
 				847F2D391EB83B42006707A5 /* CAObject.m in Sources */,
+				843B5FBB1EB9BDE800E01EEF /* CAUploader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

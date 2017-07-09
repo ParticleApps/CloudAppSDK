@@ -11,15 +11,18 @@
 #import "CANetworkManager.h"
 #import "CAObjectPrivate.h"
 #import "CAItemPrivate.h"
+#import "CAUploader.h"
 
 NSString *const bookmarkNameKey = @"name";
 NSString *const bookmarkURLKey  = @"redirect_url";
 
 @implementation CAAPIManager
 
+//TODO: Implement Share Functions
+//TODO: Implement Favorite Functions
 //TODO: Implement CloudApp Stream API
 //TODO: Implement List Items by Source
-//TODO: Implement Upload File
+//TODO: Implement Expiration Functions
 //TODO: Implement Upload File With Specific Privacy
 
 #pragma mark - Initializers
@@ -168,6 +171,16 @@ NSString *const bookmarkURLKey  = @"redirect_url";
 }
 
 #pragma mark - Actions
+
+- (void)createNewItem:(NSString *)name path:(NSString *)path success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure {
+    CAUploader *uploader = [[CAUploader alloc] initWithFilePath:path name:name];
+    [uploader upload:^(NSDictionary *response) {
+        if (success) {
+            CAItem *item = [[CAItem alloc] initWithDictionary:response];
+            success(item);
+        }
+    } failure:failure];
+}
 
 - (void)createBookmarkWithName:(NSString *)name url:(NSURL *)url success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure {
     [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager urlWithExtension:itemsExtension]
