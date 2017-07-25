@@ -80,7 +80,7 @@
 #pragma mark - Fetch
 
 - (void)fetchStatisticsWithSuccess:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {
-    [[CANetworkManager sharedInstance] getRequestWithURL:[CANetworkManager urlWithExtension:statisticsExtension] completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+    [[CANetworkManager sharedInstance] getRequestWithURL:[CANetworkManager secureUrlWithExtension:statisticsExtension] completion:^(NSData *data, NSURLResponse *response, NSError *error) {
         BOOL hasSuccess = false;
         if (data != nil) {
             id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:NULL];
@@ -105,21 +105,21 @@
 
 - (void)registerWithEmail:(NSString *)email password:(NSString *)password acceptsToS:(BOOL)tos success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {
     self.credential = [CANetworkManager credentialForEmail:email password:password];
-    [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager urlWithExtension:registerExtension]
+    [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager secureUrlWithExtension:registerExtension]
                                                      body:@{kUser: @{kEmail : email, kPassword:password, kAcceptTOS:@(tos)}}
                                                  delegate:self
                                                completion:[self completionBlockForNewUserWithSuccess:success failure:failure]];}
 
 - (void)loginWithEmail:(NSString *)email password:(NSString *)password success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {
     self.credential = [CANetworkManager credentialForEmail:email password:password];
-    [[CANetworkManager sharedInstance] getRequestWithURL:[CANetworkManager urlWithExtension:accountExtension]
+    [[CANetworkManager sharedInstance] getRequestWithURL:[CANetworkManager secureUrlWithExtension:accountExtension]
                                                 delegate:self
                                               completion:[self completionBlockForNewUserWithSuccess:success failure:failure]];
 }
 
 - (void)requestPasswordResetWithSuccess:(void (^)())success failure:(void (^)(NSError *error))failure {
     CAUser *user = [[CAUserManager sharedInstance] currentUser];
-    [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager urlWithExtension:resetPasswordExtension]
+    [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager secureUrlWithExtension:resetPasswordExtension]
                                                      body:@{kUser:@{kEmail:user.email}}
                                                completion:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                    dispatch_async(dispatch_get_main_queue(), ^{
@@ -134,25 +134,25 @@
 }
 
 - (void)setHasPrivateItems:(BOOL)privateItems success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {
-    [[CANetworkManager sharedInstance] putRequestWithURL:[CANetworkManager urlWithExtension:accountExtension]
+    [[CANetworkManager sharedInstance] putRequestWithURL:[CANetworkManager secureUrlWithExtension:accountExtension]
                                                     body:@{kUser:@{kPrivateItems:@(privateItems)}}
                                               completion:[self completionBlockForCurrentUserWithSuccess:success failure:failure]];
 }
 
 - (void)setCustomDomain:(NSString *)domain homepage:(NSString *)homepage success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {
-    [[CANetworkManager sharedInstance] putRequestWithURL:[CANetworkManager urlWithExtension:accountExtension]
+    [[CANetworkManager sharedInstance] putRequestWithURL:[CANetworkManager secureUrlWithExtension:accountExtension]
                                                     body:@{kUser: @{kDomain:domain, kDomainHomePage:homepage}}
                                               completion:[self completionBlockForCurrentUserWithSuccess:success failure:failure]];
 }
 
 - (void)setPassword:(NSString *)newPassword currentPassword:(NSString *)oldPassword success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {
-    [[CANetworkManager sharedInstance] putRequestWithURL:[CANetworkManager urlWithExtension:accountExtension]
+    [[CANetworkManager sharedInstance] putRequestWithURL:[CANetworkManager secureUrlWithExtension:accountExtension]
                                                     body:@{kUser:@{kPassword:newPassword, kCurrnetPassword:oldPassword}}
                                               completion:[self completionBlockForCurrentUserWithSuccess:success failure:failure]];
 }
 
 - (void)setEmail:(NSString *)email currentPassword:(NSString *)oldPassword success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {
-    [[CANetworkManager sharedInstance] putRequestWithURL:[CANetworkManager urlWithExtension:accountExtension]
+    [[CANetworkManager sharedInstance] putRequestWithURL:[CANetworkManager secureUrlWithExtension:accountExtension]
                                                     body:@{kUser:@{kEmail:email, kCurrnetPassword:oldPassword}}
                                               completion:[self completionBlockForCurrentUserWithSuccess:success failure:failure]];
 }

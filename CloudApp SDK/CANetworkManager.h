@@ -25,6 +25,10 @@ extern NSString *const newItemExtension;
 
 + (NSURL *)urlWithExtension:(NSString *)extension parameters:(NSDictionary *)parameters;
 
++ (NSURL *)secureUrlWithExtension:(NSString *)extension;
+
++ (NSURL *)secureUrlWithExtension:(NSString *)extension parameters:(NSDictionary *)parameters;
+
 + (NSURLCredential *)credentialForEmail:(NSString *)email password:(NSString *)password;
 
 - (void)getRequestWithURL:(NSURL *)url completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion;

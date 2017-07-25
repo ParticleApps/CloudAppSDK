@@ -12,13 +12,14 @@
 #import "CANetworkManager.h"
 
 NSString *const accountExtension       = @"account";
-NSString *const statisticsExtension    = @"stats";
+NSString *const statisticsExtension    = @"account/stats";
 NSString *const registerExtension      = @"register";
 NSString *const resetPasswordExtension = @"reset";
 NSString *const itemsExtension         = @"items";
 NSString *const newItemExtension       = @"v3/items";
 
-static NSString *const rootURL = @"https://my.cl.ly/";
+static NSString *const secureRootURL = @"https://my.cl.ly/";
+static NSString *const rootURL = @"http://my.cl.ly/";
 
 @interface CANetworkManager () <NSURLSessionDelegate>
 @end
@@ -48,6 +49,32 @@ static NSString *const rootURL = @"https://my.cl.ly/";
 
 + (NSURL *)urlWithExtension:(NSString *)extension parameters:(NSDictionary *)parameters {
     NSURLComponents *components = [[NSURLComponents alloc] initWithURL:[CANetworkManager urlWithExtension:extension] resolvingAgainstBaseURL:NO];
+    NSMutableArray *queryItems  = [NSMutableArray arrayWithArray:components.queryItems];
+    for (id parameter in parameters.allKeys) {
+        id key   = parameter;
+        id value = parameters[key];
+        
+        if (![key isKindOfClass:[NSString class]]) {
+            key = [key stringValue];
+        }
+        if (![value isKindOfClass:[NSString class]]) {
+            value = [value stringValue];
+        }
+        
+        NSURLQueryItem *queryItem = [[NSURLQueryItem alloc] initWithName:key value:value];
+        [queryItems addObject:queryItem];
+    }
+    [components setQueryItems:queryItems];
+    
+    return components.URL;
+}
+
++ (NSURL *)secureUrlWithExtension:(NSString *)extension {
+    return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/", secureRootURL, extension]];
+}
+
++ (NSURL *)secureUrlWithExtension:(NSString *)extension parameters:(NSDictionary *)parameters {
+    NSURLComponents *components = [[NSURLComponents alloc] initWithURL:[CANetworkManager secureUrlWithExtension:extension] resolvingAgainstBaseURL:NO];
     NSMutableArray *queryItems  = [NSMutableArray arrayWithArray:components.queryItems];
     for (id parameter in parameters.allKeys) {
         id key   = parameter;

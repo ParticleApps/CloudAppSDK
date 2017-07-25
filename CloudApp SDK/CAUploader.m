@@ -44,7 +44,7 @@
 
 - (void)requestNewItem:(void (^)(NSDictionary *response))success failure:(void (^)(NSError *error))failure {
     self.status = CAUploaderStatusRequestingNewItem;
-    [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager urlWithExtension:newItemExtension] body:@{kName : self.name} completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+    [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager secureUrlWithExtension:newItemExtension] body:@{kName : self.name} completion:^(NSData *data, NSURLResponse *response, NSError *error) {
         BOOL localSuccess = false;
         if (data != nil) {
             id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:NULL];

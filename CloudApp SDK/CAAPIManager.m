@@ -118,7 +118,7 @@ NSString *const bookmarkURLKey  = @"redirect_url";
 
 - (void)fetchItemsAtPage:(NSInteger)page success:(void (^)(NSArray<CAItem *> *items))success failure:(void (^)(NSError *error))failure {
     NSDictionary *parameters = @{kPage:@(page),kItemsPerPage:@(self.defaultItemsPerPage)};
-    [[CANetworkManager sharedInstance] getRequestWithURL:[CANetworkManager urlWithExtension:itemsExtension parameters:parameters]
+    [[CANetworkManager sharedInstance] getRequestWithURL:[CANetworkManager secureUrlWithExtension:itemsExtension parameters:parameters]
                                               completion:[self completionBlockForItemsWithSuccess:success failure:failure]];
 }
 
@@ -128,13 +128,13 @@ NSString *const bookmarkURLKey  = @"redirect_url";
                  success:(void (^)())success
                  failure:(void (^)(NSError *error))failure {
     NSDictionary *parameters = @{kPage:@(page),kItemsPerPage:@(numberOfItems),kType:[CAItem apiValueForItemType:type]};
-    [[CANetworkManager sharedInstance] getRequestWithURL:[CANetworkManager urlWithExtension:itemsExtension parameters:parameters]
+    [[CANetworkManager sharedInstance] getRequestWithURL:[CANetworkManager secureUrlWithExtension:itemsExtension parameters:parameters]
                                               completion:[self completionBlockForItemsWithSuccess:success failure:failure]];
 }
 
 - (void)fetchArchivedItemsAtPage:(NSInteger)page success:(void (^)())success failure:(void (^)(NSError *error))failure {
     NSDictionary *parameters = @{kPage:@(page),kItemsPerPage:@(self.defaultItemsPerPage), kDeleted:@(true)};
-    [[CANetworkManager sharedInstance] getRequestWithURL:[CANetworkManager urlWithExtension:itemsExtension parameters:parameters]
+    [[CANetworkManager sharedInstance] getRequestWithURL:[CANetworkManager secureUrlWithExtension:itemsExtension parameters:parameters]
                                               completion:[self completionBlockForItemsWithSuccess:success failure:failure]];
 }
 
@@ -144,7 +144,7 @@ NSString *const bookmarkURLKey  = @"redirect_url";
                           success:(void (^)())success
                           failure:(void (^)(NSError *error))failure {
     NSDictionary *parameters = @{kPage:@(page),kItemsPerPage:@(numberOfItems), kType:[CAItem apiValueForItemType:type], kDeleted:@(true)};
-    [[CANetworkManager sharedInstance] getRequestWithURL:[CANetworkManager urlWithExtension:itemsExtension parameters:parameters]
+    [[CANetworkManager sharedInstance] getRequestWithURL:[CANetworkManager secureUrlWithExtension:itemsExtension parameters:parameters]
                                               completion:[self completionBlockForItemsWithSuccess:success failure:failure]];
 }
 
@@ -183,36 +183,36 @@ NSString *const bookmarkURLKey  = @"redirect_url";
 }
 
 - (void)createBookmarkWithName:(NSString *)name url:(NSURL *)url success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure {
-    [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager urlWithExtension:itemsExtension]
+    [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager secureUrlWithExtension:itemsExtension]
                                                      body:@{kItem: @{kName:name, kRedirectURL:url.absoluteString}}
                                                completion:[self completionBlockForItemWithSuccess:success failure:failure]];
 }
 
 - (void)createBookmarks:(NSArray<NSDictionary *> *)bookmarks success:(void (^)(NSArray<CAItem *> *items))success failure:(void (^)(NSError *error))failure {
-    [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager urlWithExtension:itemsExtension]
+    [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager secureUrlWithExtension:itemsExtension]
                                                      body:@{kItem: bookmarks}
                                                completion:[self completionBlockForItemsWithSuccess:success failure:failure]];
 }
 
 - (void)setItem:(CAItem *)item isPrivate:(BOOL)private success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure {
-    [[CANetworkManager sharedInstance] putRequestWithURL:[[CANetworkManager urlWithExtension:itemsExtension] URLByAppendingPathExtension:[@(item.uniqueId) stringValue]]
+    [[CANetworkManager sharedInstance] putRequestWithURL:[[CANetworkManager secureUrlWithExtension:itemsExtension] URLByAppendingPathExtension:[@(item.uniqueId) stringValue]]
                                                     body:@{kItem: @{kPrivate: @(private)}}
                                               completion:[self completionBlockForItemUpdate:item success:success failure:failure]];
 }
 
 - (void)deleteItem:(CAItem *)item success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure {
-    [[CANetworkManager sharedInstance] deleteRequestWithURL:[[CANetworkManager urlWithExtension:itemsExtension] URLByAppendingPathExtension:[@(item.uniqueId) stringValue]]
+    [[CANetworkManager sharedInstance] deleteRequestWithURL:[[CANetworkManager secureUrlWithExtension:itemsExtension] URLByAppendingPathExtension:[@(item.uniqueId) stringValue]]
                                                  completion:[self completionBlockForItemUpdate:item success:success failure:failure]];
 }
 
 - (void)recoverItem:(CAItem *)item success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure {
-    [[CANetworkManager sharedInstance] putRequestWithURL:[[CANetworkManager urlWithExtension:itemsExtension] URLByAppendingPathExtension:[@(item.uniqueId) stringValue]]
+    [[CANetworkManager sharedInstance] putRequestWithURL:[[CANetworkManager secureUrlWithExtension:itemsExtension] URLByAppendingPathExtension:[@(item.uniqueId) stringValue]]
                                                     body:@{kDeleted: @(true), kItem: @{kDeletedAt: @"null"}}
                                               completion:[self completionBlockForItemUpdate:item success:success failure:failure]];
 }
 
 - (void)renameItem:(CAItem *)item name:(NSString *)name success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure {
-    [[CANetworkManager sharedInstance] putRequestWithURL:[[CANetworkManager urlWithExtension:itemsExtension] URLByAppendingPathExtension:[@(item.uniqueId) stringValue]]
+    [[CANetworkManager sharedInstance] putRequestWithURL:[[CANetworkManager secureUrlWithExtension:itemsExtension] URLByAppendingPathExtension:[@(item.uniqueId) stringValue]]
                                                     body:@{kItem: @{kName: name}}
                                               completion:[self completionBlockForItemUpdate:item success:success failure:failure]];
 }
