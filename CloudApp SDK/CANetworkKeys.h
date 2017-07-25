@@ -38,6 +38,7 @@ static NSString *const kName                       = @"name";
 static NSString *const kPrivate                    = @"private";
 static NSString *const kURL                        = @"url";
 static NSString *const kContentURL                 = @"content_url";
+static NSString *const kShareURL                   = @"share_url";
 static NSString *const kItemType                   = @"item_type";
 static NSString *const kViewCounter                = @"view_counter";
 static NSString *const kIcon                       = @"icon";

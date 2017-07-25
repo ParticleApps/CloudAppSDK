@@ -45,6 +45,10 @@
     
     mutableDictionary[kUniqueId] = @(uniqueId);
     
+    if (![mutableDictionary.allKeys containsObject:kURL] && [mutableDictionary.allKeys containsObject:kShareURL]) {
+        mutableDictionary[kURL] = mutableDictionary[kShareURL];
+    }
+    
     return mutableDictionary;
 }
 
