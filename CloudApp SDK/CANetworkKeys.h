@@ -50,5 +50,12 @@ static NSString *const kHomePage                   = @"home_page";
 static NSString *const kParams                     = @"params";
 static NSString *const kFile                       = @"file";
 static NSString *const kS3                         = @"s3";
+static NSString *const kImage                      = @"image";
+static NSString *const kText                       = @"text";
+static NSString *const kArchive                    = @"archive";
+static NSString *const kVideo                      = @"video";
+static NSString *const kAudio                      = @"audio";
+static NSString *const kBookmark                   = @"bookmark";
+static NSString *const kUnkown                     = @"unkown";
 
 #endif /* CANetworkKeys_h */

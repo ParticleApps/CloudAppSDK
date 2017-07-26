@@ -30,12 +30,45 @@
 @implementation CAItem
 
 + (CAItemType)typeForAPIValue:(NSString *)value {
-    //TODO: Return dynamically once a list of item types is found
-    return CAItemTypeImage;
+    if ([value isEqualToString:kImage]) {
+        return CAItemTypeImage;
+    }
+    if ([value isEqualToString:kText]) {
+        return CAItemTypeText;
+    }
+    else if ([value isEqualToString:kVideo]) {
+        return CAItemTypeVideo;
+    }
+    else if ([value isEqualToString:kArchive]) {
+        return CAItemTypeArchive;
+    }
+    else if ([value isEqualToString:kBookmark]) {
+        return CAItemTypeBookmark;
+    }
+    else if ([value isEqualToString:kAudio]) {
+        return CAItemTypeAudio;
+    }
+    
+    return CAItemTypeUnkown;
 }
 
 + (NSString *)apiValueForItemType:(CAItemType)type {
-    return @"image";
+    switch (type) {
+        case CAItemTypeBookmark:
+            return kBookmark;
+        case CAItemTypeArchive:
+            return kArchive;
+        case CAItemTypeVideo:
+            return kVideo;
+        case CAItemTypeText:
+            return kText;
+        case CAItemTypeImage:
+            return kImage;
+        case CAItemTypeAudio:
+            return kAudio;
+        default:
+            return kUnkown;
+    }
 }
 
 - (NSDictionary *)preprocessedDictionary:(NSDictionary *)dictionary {

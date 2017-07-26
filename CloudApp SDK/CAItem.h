@@ -9,8 +9,14 @@
 #import "CAObject.h"
 
 typedef NS_ENUM(NSInteger, CAItemType) {
-    CAItemTypeAll = 0,
-    CAItemTypeImage = 1
+    CAItemTypeAll      = 0,
+    CAItemTypeImage    = 1,
+    CAItemTypeText     = 2,
+    CAItemTypeBookmark = 3,
+    CAItemTypeVideo    = 4,
+    CAItemTypeArchive  = 5,
+    CAItemTypeAudio    = 6,
+    CAItemTypeUnkown   = 7
 };
 
 @interface CAItem : CAObject
