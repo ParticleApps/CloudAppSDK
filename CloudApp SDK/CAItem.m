@@ -83,6 +83,9 @@
     if (![mutableDictionary.allKeys containsObject:kURL] && [mutableDictionary.allKeys containsObject:kShareURL]) {
         mutableDictionary[kURL] = mutableDictionary[kShareURL];
     }
+    if (![mutableDictionary[kContentSize] isKindOfClass:[NSNumber class]]) {
+        mutableDictionary[kContentSize] = @(0);
+    }
     
     return mutableDictionary;
 }
