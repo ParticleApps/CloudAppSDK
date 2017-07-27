@@ -13,11 +13,13 @@
 #import "NSDate+CAExtensions.h"
 
 @interface CAItem ()
+@property (nonatomic) NSNumber *contentSize;
 @property (nonatomic) NSString *name;
 @property (nonatomic) BOOL isPrivate;
 @property (nonatomic) BOOL isSubscribed;
 @property (nonatomic) NSURL *url;
 @property (nonatomic) NSURL *contentURL;
+@property (nonatomic) NSURL *downloadURL;
 @property (nonatomic) CAItemType type;
 @property (nonatomic) NSInteger views;
 @property (nonatomic) NSURL *iconURL;
@@ -89,9 +91,11 @@
     BOOL changed = [super updateWithDictionary:dictionary];
     if (changed) {
         self.name         = dictionary[kName];
+        self.contentSize  = dictionary[kContentSize];
         self.isPrivate    = [dictionary[kPrivate] boolValue];
         self.isSubscribed = [dictionary[kSubscribed] boolValue];
         self.url          = [NSURL URLWithString:dictionary[kURL]];
+        self.downloadURL  = [NSURL URLWithString:dictionary[kDownloadURL]];
         self.contentURL   = [NSURL URLWithString:dictionary[kContentURL]];
         self.type         = [CAItem typeForAPIValue:dictionary[kItemType]];
         self.views        = [dictionary[kViewCounter] integerValue];
