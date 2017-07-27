@@ -24,6 +24,8 @@
 
 - (void)loginWithEmail:(NSString *)email password:(NSString *)password success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure;
 
+- (void)validateExistingCredentials:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure;
+
 - (void)requestPasswordResetWithSuccess:(void (^)())success failure:(void (^)(NSError *error))failure;
 
 - (void)setHasPrivateItems:(BOOL)privateItems success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure;
