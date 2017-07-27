@@ -103,6 +103,15 @@
 
 #pragma mark - Actions
 
+- (void)logout {
+    self.currentUser = nil;
+    [[CANetworkManager sharedInstance] setUserCredential:nil];
+    
+    for (NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]) {
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+    }
+}
+
 - (void)registerWithEmail:(NSString *)email password:(NSString *)password acceptsToS:(BOOL)tos success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {
     self.credential = [CANetworkManager credentialForEmail:email password:password];
     [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager secureUrlWithExtension:registerExtension]

@@ -20,6 +20,8 @@
 - (void)fetchStatisticsWithSuccess:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure;
 
 //Actions
+- (void)logout;
+
 - (void)registerWithEmail:(NSString *)email password:(NSString *)password acceptsToS:(BOOL)tos success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure;
 
 - (void)loginWithEmail:(NSString *)email password:(NSString *)password success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure;

@@ -39,8 +39,13 @@ static NSString *const rootURL = @"http://my.cl.ly/";
 
 #pragma mark - Class Methods
 
++ (NSURLProtectionSpace *)protectionSpace {
+    NSURL *url = [CANetworkManager secureUrlWithExtension:accountExtension];
+    return [[NSURLProtectionSpace alloc] initWithHost:url.host port:url.port.integerValue protocol:url.scheme realm:nil authenticationMethod:NSURLAuthenticationMethodHTTPDigest];
+}
+
 + (NSURLCredential *)credentialForEmail:(NSString *)email password:(NSString *)password {
-    return [NSURLCredential credentialWithUser:email password:password persistence:NSURLCredentialPersistencePermanent];
+    return [NSURLCredential credentialWithUser:email password:password persistence:NSURLCredentialPersistenceForSession];
 }
 
 + (NSURL *)urlWithExtension:(NSString *)extension {
@@ -115,6 +120,26 @@ static NSString *const rootURL = @"http://my.cl.ly/";
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session                    = [NSURLSession sessionWithConfiguration:configuration delegate:delegate delegateQueue:nil];
     return session;
+}
+
+#pragma mark - Modifiers
+
+- (void)setUserCredential:(NSURLCredential *)userCredential {
+    //Set Variables
+    NSURLProtectionSpace *protectionSpace = [CANetworkManager protectionSpace];
+    NSDictionary *credentials             = [[NSURLCredentialStorage sharedCredentialStorage] credentialsForProtectionSpace:protectionSpace];
+    NSURLCredential *credential           = [credentials.objectEnumerator nextObject];
+    
+    //Clean Previous Credentials
+    if (credential) {
+        [[NSURLCredentialStorage sharedCredentialStorage] removeCredential:credential forProtectionSpace:protectionSpace];
+    }
+    
+    //Set New Credentials
+    _userCredential = userCredential;
+    if (userCredential) {
+        [[NSURLCredentialStorage sharedCredentialStorage] setCredential:userCredential forProtectionSpace:protectionSpace];
+    }
 }
 
 #pragma mark - Actions
