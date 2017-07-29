@@ -132,10 +132,9 @@
                                               completion:[self completionBlockForNewUserWithSuccess:success failure:failure]];
 }
 
-- (void)requestPasswordResetWithSuccess:(void (^)())success failure:(void (^)(NSError *error))failure {
-    CAUser *user = [[CAUserManager sharedInstance] currentUser];
+- (void)requestPasswordReset:(NSString *)email success:(void (^)())success failure:(void (^)(NSError *error))failure {
     [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager secureUrlWithExtension:resetPasswordExtension]
-                                                     body:@{kUser:@{kEmail:user.email}}
+                                                     body:@{kUser:@{kEmail:email}}
                                                completion:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                    dispatch_async(dispatch_get_main_queue(), ^{
                                                        if (error && failure) {
