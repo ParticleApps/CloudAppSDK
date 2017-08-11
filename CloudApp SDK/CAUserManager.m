@@ -115,7 +115,7 @@
 - (void)registerWithEmail:(NSString *)email password:(NSString *)password acceptsToS:(BOOL)tos success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {
     self.credential = [CANetworkManager credentialForEmail:email password:password];
     [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager secureUrlWithExtension:registerExtension]
-                                                     body:@{kUser: @{kEmail : email, kPassword:password, kAcceptTOS:@(tos)}}
+                                                     body:@{kUser: @{kEmail : email, kUserPassword:password, kAcceptTOS:@(tos)}}
                                                  delegate:self
                                                completion:[self completionBlockForNewUserWithSuccess:success failure:failure]];
 }
@@ -161,7 +161,7 @@
 
 - (void)setPassword:(NSString *)newPassword currentPassword:(NSString *)oldPassword success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {
     [[CANetworkManager sharedInstance] putRequestWithURL:[CANetworkManager secureUrlWithExtension:accountExtension]
-                                                    body:@{kUser:@{kPassword:newPassword, kCurrnetPassword:oldPassword}}
+                                                    body:@{kUser:@{kUserPassword:newPassword, kCurrnetPassword:oldPassword}}
                                               completion:[self completionBlockForCurrentUserWithSuccess:success failure:failure]];
 }
 

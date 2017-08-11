@@ -6,8 +6,7 @@
 //  Copyright © 2017 Rocco Del Priore. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <MobileCoreServices/MobileCoreServices.h>
+#include <dlfcn.h>
 
 #import "CANetworkManager.h"
 
@@ -211,11 +210,17 @@ static NSString *const rootURL = @"http://my.cl.ly/";
 #pragma mark - Multipart Requests
 
 - (NSString *)mimeTypeForPath:(NSString *)path {
+    CFStringRef (*identifierForTag)(CFStringRef, CFStringRef, void *) = dlsym(RTLD_DEFAULT, "UTTypeCreatePreferredIdentifierForTag");
+    CFStringRef (*preferredTagWithClass)(CFStringRef, CFStringRef)    = dlsym(RTLD_DEFAULT, "UTTypeCopyPreferredTagWithClass");
+    
+    CFStringRef kUTTagClassFilenameExtension = CFSTR("public.filename-extension");
+    CFStringRef kUTTagClassMIMEType          = CFSTR("public.mime-type");
+    
     CFStringRef extension = (__bridge CFStringRef)[path pathExtension];
-    CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, extension, NULL);
+    CFStringRef UTI       = identifierForTag(kUTTagClassFilenameExtension, extension, NULL);
     assert(UTI != NULL);
     
-    NSString *mimetype = CFBridgingRelease(UTTypeCopyPreferredTagWithClass(UTI, kUTTagClassMIMEType));
+    NSString *mimetype = CFBridgingRelease(preferredTagWithClass(UTI, kUTTagClassMIMEType));
     assert(mimetype != NULL);
     
     CFRelease(UTI);

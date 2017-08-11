@@ -36,7 +36,7 @@
         self.isAlpha                    = [dictionary[kAlpha] boolValue];
         self.subscriptionExpirationDate = [NSDate dateFromISO8601String:dictionary[kSubscriptionExpirationDate]];
     }
-    return self;
+    return updated;
 }
 
 - (void)updateStatisticsWithDictionary:(NSDictionary *)dictionary {

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Rocco Del Priore. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for CloudApp SDK.
 FOUNDATION_EXPORT double CloudApp_SDKVersionNumber;
