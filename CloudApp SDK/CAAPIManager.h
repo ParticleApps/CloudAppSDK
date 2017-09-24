@@ -30,6 +30,12 @@ extern NSString *const bookmarkURLKey;
                  success:(void (^)())success
                  failure:(void (^)(NSError *error))failure;
 
+- (void)fetchItemsAtPage:(NSInteger)page
+    numberOfItemsPerPage:(NSInteger)numberOfItems
+                  source:(NSString *)source
+                 success:(void (^)())success
+                 failure:(void (^)(NSError *error))failure;
+
 - (void)fetchArchivedItemsAtPage:(NSInteger)page success:(void (^)(NSArray<CAItem *> *items))success failure:(void (^)(NSError *error))failure;
 
 - (void)fetchArchievedItemsAtPage:(NSInteger)page
@@ -61,6 +67,8 @@ extern NSString *const bookmarkURLKey;
 - (void)shareItem:(CAItem *)item with:(NSArray<NSString *> *)recipients message:(NSString *)message success:(void (^)())success failure:(void (^)(NSError *error))failure;
 
 - (void)deleteItem:(CAItem *)item success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure;
+
+- (void)recoverItem:(CAItem *)item success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure;
 
 - (void)renameItem:(CAItem *)item name:(NSString *)name success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure;
 

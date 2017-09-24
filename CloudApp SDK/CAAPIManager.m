@@ -22,6 +22,7 @@ NSString *const bookmarkURLKey  = @"redirect_url";
 
 //TODO: Implement CloudApp Stream API
 //TODO: Implement Upload File With Specific Privacy
+//TODO: Implement Gift Card Stuff
 
 #pragma mark - Initializers
 
@@ -182,6 +183,16 @@ NSString *const bookmarkURLKey  = @"redirect_url";
                                               completion:[self completionBlockForItemsWithSuccess:success failure:failure]];
 }
 
+- (void)fetchItemsAtPage:(NSInteger)page
+    numberOfItemsPerPage:(NSInteger)numberOfItems
+                  source:(NSString *)source
+                 success:(void (^)())success
+                 failure:(void (^)(NSError *error))failure {
+    NSDictionary *parameters = @{kPage:@(page),kItemsPerPage:@(numberOfItems),kSource:source};
+    [[CANetworkManager sharedInstance] getRequestWithURL:[CANetworkManager secureUrlWithExtension:itemsExtension parameters:parameters]
+                                              completion:[self completionBlockForItemsWithSuccess:success failure:failure]];
+}
+
 - (void)fetchArchivedItemsAtPage:(NSInteger)page success:(void (^)(NSArray<CAItem *> *items))success failure:(void (^)(NSError *error))failure {
     NSDictionary *parameters = @{kPage:@(page),kItemsPerPage:@(self.defaultItemsPerPage), kDeleted:@(true)};
     [[CANetworkManager sharedInstance] getRequestWithURL:[CANetworkManager secureUrlWithExtension:itemsExtension parameters:parameters]
@@ -295,12 +306,11 @@ NSString *const bookmarkURLKey  = @"redirect_url";
                                                  completion:[self completionBlockForItemUpdate:item success:success failure:failure]];
 }
 
-//TODO: Look with this, its part of the old API, may not exist anymore
-/*- (void)recoverItem:(CAItem *)item success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure {
+- (void)recoverItem:(CAItem *)item success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure {
     [[CANetworkManager sharedInstance] putRequestWithURL:[[CANetworkManager secureUrlWithExtension:itemsExtension] URLByAppendingPathComponent:[@(item.uniqueId) stringValue]]
                                                     body:@{kDeleted: @(true), kItem: @{kDeletedAt: @"null"}}
                                               completion:[self completionBlockForItemUpdate:item success:success failure:failure]];
-}*/
+}
 
 - (void)renameItem:(CAItem *)item name:(NSString *)name success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure {
     [[CANetworkManager sharedInstance] putRequestWithURL:[[CANetworkManager secureUrlWithExtension:itemsExtension] URLByAppendingPathComponent:[@(item.uniqueId) stringValue]]
