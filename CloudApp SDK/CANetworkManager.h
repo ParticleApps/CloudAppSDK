@@ -14,6 +14,9 @@ extern NSString *const registerExtension;
 extern NSString *const resetPasswordExtension;
 extern NSString *const itemsExtension;
 extern NSString *const newItemExtension;
+extern NSString *const favoriteExtension;
+extern NSString *const shareExtension;
+extern NSString *const expirationExtension;
 
 @interface CANetworkManager : NSObject
 
@@ -48,5 +51,7 @@ extern NSString *const newItemExtension;
 - (void)deleteRequestWithURL:(NSURL *)url delegate:(id<NSURLSessionDelegate>)delegate completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion;
 
 - (void)multiPartPostRequestWithURL:(NSURL *)url body:(NSDictionary *)jsonBody path:(NSString *)path completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion;
+
++ (void (^)(NSData *data, NSURLResponse *response, NSError *error))completionBlockForEmptyResponse:(void (^)())success failure:(void (^)(NSError *error))failure;
 
 @end

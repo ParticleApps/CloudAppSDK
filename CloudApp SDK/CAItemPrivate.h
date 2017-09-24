@@ -11,4 +11,6 @@
 @interface CAItem ()
 + (CAItemType)typeForAPIValue:(NSString *)value;
 + (NSString *)apiValueForItemType:(CAItemType)type;
+- (void)updateFavoriteStatusWithDictionary:(NSDictionary *)dictionary;
+- (void)updateExpirationStatusWithDictionary:(NSDictionary *)dictionary;
 @end

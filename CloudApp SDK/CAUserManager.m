@@ -135,16 +135,7 @@
 - (void)requestPasswordReset:(NSString *)email success:(void (^)())success failure:(void (^)(NSError *error))failure {
     [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager secureUrlWithExtension:resetPasswordExtension]
                                                      body:@{kUser:@{kEmail:email}}
-                                               completion:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                                       if (error && failure) {
-                                                           failure(error);
-                                                       }
-                                                       else if (!error && success) {
-                                                           success();
-                                                       }
-                                                   });
-                                               }];
+                                               completion:[CANetworkManager completionBlockForEmptyResponse:success failure:failure]];
 }
 
 - (void)setHasPrivateItems:(BOOL)privateItems success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure {

@@ -16,6 +16,9 @@ NSString *const registerExtension      = @"register";
 NSString *const resetPasswordExtension = @"reset";
 NSString *const itemsExtension         = @"items";
 NSString *const newItemExtension       = @"v3/items";
+NSString *const favoriteExtension      = @"favorite";
+NSString *const shareExtension         = @"share";
+NSString *const expirationExtension    = @"expiration";
 
 static NSString *const secureRootURL = @"https://my.cl.ly/";
 static NSString *const rootURL = @"http://my.cl.ly/";
@@ -275,6 +278,20 @@ static NSString *const rootURL = @"http://my.cl.ly/";
     //Execute Request
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:completion];
     [task resume];
+}
+
+
++ (void (^)(NSData *data, NSURLResponse *response, NSError *error))completionBlockForEmptyResponse:(void (^)())success failure:(void (^)(NSError *error))failure {
+    return ^(NSData *data, NSURLResponse *response, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!error && success) {
+                success();
+            }
+            else if (error && failure) {
+                failure(error);
+            }
+        });
+    };
 }
 
 @end

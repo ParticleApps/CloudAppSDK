@@ -22,8 +22,10 @@ typedef NS_ENUM(NSInteger, CAItemType) {
 @interface CAItem : CAObject
 @property (nonatomic, readonly) NSNumber *contentSize;
 @property (nonatomic, readonly) NSString *name;
+@property (nonatomic, readonly) NSString *slug;
 @property (nonatomic, readonly) NSURL *href;
 @property (nonatomic, readonly) BOOL isPrivate;
+@property (nonatomic, readonly) BOOL isFavorite;
 @property (nonatomic, readonly) BOOL isSubscribed;
 @property (nonatomic, readonly) NSURL *url;
 @property (nonatomic, readonly) NSURL *contentURL;
@@ -35,4 +37,6 @@ typedef NS_ENUM(NSInteger, CAItemType) {
 @property (nonatomic, readonly) NSURL *redirectURL;
 @property (nonatomic, readonly) NSString *source;
 @property (nonatomic, readonly) NSDate *deteledAt;
+@property (nonatomic, readonly) NSDate *expiresAt;
+@property (nonatomic, readonly) NSInteger expiresAfter;
 @end
