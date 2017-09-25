@@ -162,7 +162,7 @@ NSString *const bookmarkURLKey  = @"redirect_url";
 #pragma mark - Fetch
 
 - (void)fetchItemWithUniqueId:(NSInteger)uniqueId success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure {
-    NSURL *url = [CANetworkManager secureUrlWithExtension:[NSString stringWithFormat:@"%@/%li", itemsExtension, uniqueId]];
+    NSURL *url = [CANetworkManager secureUrlWithExtension:[NSString stringWithFormat:@"%@/%li", itemsExtension, (long)uniqueId]];
     [[CANetworkManager sharedInstance] getRequestWithURL:url completion:[self completionBlockForItemWithSuccess:success failure:failure]];
 }
 
