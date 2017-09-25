@@ -32,6 +32,7 @@
     self = [super init];
     if (self) {
         self.status = CAUploaderStatusHasNotStarted;
+        self.isPrivate = false;
     }
     return self;
 }
@@ -44,7 +45,9 @@
 
 - (void)requestNewItem:(void (^)(NSDictionary *response))success failure:(void (^)(NSError *error))failure {
     self.status = CAUploaderStatusRequestingNewItem;
-    [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager secureUrlWithExtension:newItemExtension] body:@{kName : self.name} completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+    [[CANetworkManager sharedInstance] postRequestWithURL:[self requestURL]
+                                                      body:@{kName : self.name}
+                                                completion:^(NSData *data, NSURLResponse *response, NSError *error) {
         BOOL localSuccess = false;
         if (data != nil) {
             id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:NULL];
@@ -65,7 +68,10 @@
 
 - (void)uploadNewItem:(void (^)(NSDictionary *response))success failure:(void (^)(NSError *error))failure {
     self.status = CAUploaderStatusUploadingFile;
-    [[CANetworkManager sharedInstance] multiPartPostRequestWithURL:[NSURL URLWithString:self.responseForNewItem[kURL]] body:self.responseForNewItem[kS3] path:self.path completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+    [[CANetworkManager sharedInstance] multiPartPostRequestWithURL:[NSURL URLWithString:self.responseForNewItem[kURL]]
+                                                               body:self.responseForNewItem[kS3]
+                                                               path:self.path
+                                                         completion:^(NSData *data, NSURLResponse *response, NSError *error) {
         BOOL localSuccess = false;
         if (data != nil) {
             id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:NULL];
@@ -92,6 +98,16 @@
     if (self.delegate) {
         [self.delegate uploaderStatusDidChange:status];
     }
+}
+
+#pragma mark - Helpers
+
+- (NSURL *)requestURL {
+    if (self.isPrivate) {
+        //HACK: Static edge case
+        return [NSURL URLWithString:@"http://my.cl.ly/items/new?item[private]=false"];
+    }
+    return [CANetworkManager secureUrlWithExtension:newItemExtension];
 }
 
 @end

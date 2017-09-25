@@ -20,8 +20,7 @@ NSString *const bookmarkURLKey  = @"redirect_url";
 
 @implementation CAAPIManager
 
-//TODO: Implement CloudApp Stream API
-//TODO: Implement Upload File With Specific Privacy
+//TODO: Implement CloudApp Stream API with Websockets: https://github.com/cloudapp/api/blob/master/stream-items.md
 //TODO: Implement Gift Card Stuff
 
 #pragma mark - Initializers
@@ -239,8 +238,9 @@ NSString *const bookmarkURLKey  = @"redirect_url";
 
 #pragma mark - Create
 
-- (void)createNewItem:(NSString *)name filePath:(NSString *)path success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure {
+- (void)createNewItem:(NSString *)name filePath:(NSString *)path isPrivate:(BOOL)private success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure {
     CAUploader *uploader = [[CAUploader alloc] initWithFilePath:path name:name];
+    uploader.isPrivate = private;
     [uploader upload:^(NSDictionary *response) {
         if (success) {
             CAItem *item = [[CAItem alloc] initWithDictionary:response];

@@ -49,7 +49,7 @@ extern NSString *const bookmarkURLKey;
 - (void)fetchHomePageForDomain:(NSString *)domain success:(void (^)(NSString *homepage))success failure:(void (^)(NSError *error))failure;
 
 //Create
-- (void)createNewItem:(NSString *)name filePath:(NSString *)path success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure;
+- (void)createNewItem:(NSString *)name filePath:(NSString *)path isPrivate:(BOOL)private success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure;
 
 - (void)createBookmarkWithName:(NSString *)name url:(NSURL *)url success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure;
 

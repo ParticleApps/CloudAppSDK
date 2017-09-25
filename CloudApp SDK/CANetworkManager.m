@@ -231,7 +231,6 @@ static NSString *const rootURL = @"http://my.cl.ly/";
     return mimetype;
 }
 
-
 - (NSData *)createBodyWithBoundary:(NSString *)boundary
                         parameters:(NSDictionary *)parameters
                              paths:(NSArray *)paths
@@ -279,7 +278,6 @@ static NSString *const rootURL = @"http://my.cl.ly/";
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:completion];
     [task resume];
 }
-
 
 + (void (^)(NSData *data, NSURLResponse *response, NSError *error))completionBlockForEmptyResponse:(void (^)())success failure:(void (^)(NSError *error))failure {
     return ^(NSData *data, NSURLResponse *response, NSError *error) {

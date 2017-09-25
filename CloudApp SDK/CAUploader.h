@@ -32,6 +32,8 @@ typedef NS_ENUM(NSInteger, CAUploaderStatus) {
 
 @property (nonatomic) NSString *name;
 
+@property (nonatomic) BOOL isPrivate;
+
 - (instancetype)initWithFilePath:(NSString *)path name:(NSString *)name;
 
 - (void)upload:(void (^)(NSDictionary *response))success failure:(void (^)(NSError *error))failure;
