@@ -45,9 +45,7 @@
 
 - (void)requestNewItem:(void (^)(NSDictionary *response))success failure:(void (^)(NSError *error))failure {
     self.status = CAUploaderStatusRequestingNewItem;
-    [[CANetworkManager sharedInstance] postRequestWithURL:[self requestURL]
-                                                      body:@{kName : self.name}
-                                                completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+    [[CANetworkManager sharedInstance] postRequestWithURL:[self requestURL] body:@{kName : self.name} completion:^(NSData *data, NSURLResponse *response, NSError *error) {
         BOOL localSuccess = false;
         if (data != nil) {
             id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:NULL];
@@ -69,7 +67,7 @@
 - (void)uploadNewItem:(void (^)(NSDictionary *response))success failure:(void (^)(NSError *error))failure {
     self.status = CAUploaderStatusUploadingFile;
     [[CANetworkManager sharedInstance] multiPartPostRequestWithURL:[NSURL URLWithString:self.responseForNewItem[kURL]]
-                                                               body:self.responseForNewItem[kS3]
+                                                               body:[self uploadBody]
                                                                path:self.path
                                                          completion:^(NSData *data, NSURLResponse *response, NSError *error) {
         BOOL localSuccess = false;
@@ -103,11 +101,19 @@
 #pragma mark - Helpers
 
 - (NSURL *)requestURL {
+    //HACK: The current URL seems to broken, hard linked to the deprecated URL as a patch
+    //return [CANetworkManager secureUrlWithExtension:newItemExtension];
     if (self.isPrivate) {
-        //HACK: Static edge case
         return [NSURL URLWithString:@"http://my.cl.ly/items/new?item[private]=false"];
     }
-    return [CANetworkManager secureUrlWithExtension:newItemExtension];
+    return [NSURL URLWithString:@"http://my.cl.ly/items/new"];
+}
+
+- (NSDictionary *)uploadBody {
+    if ([self.responseForNewItem.allKeys containsObject:kS3]) {
+        return self.responseForNewItem[kS3];
+    }
+    return self.responseForNewItem[kParams];
 }
 
 @end
