@@ -64,6 +64,6 @@ static NSString *const kArchive                    = @"archive";
 static NSString *const kVideo                      = @"video";
 static NSString *const kAudio                      = @"audio";
 static NSString *const kBookmark                   = @"bookmark";
-static NSString *const kUnkown                     = @"unkown";
+static NSString *const kUnknown                    = @"unknown";
 
 #endif /* CANetworkKeys_h */

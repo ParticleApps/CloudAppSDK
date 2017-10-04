@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger, CAItemType) {
     CAItemTypeVideo    = 4,
     CAItemTypeArchive  = 5,
     CAItemTypeAudio    = 6,
-    CAItemTypeUnkown   = 7
+    CAItemTypeUnknown  = 7
 };
 
 @interface CAItem : CAObject
