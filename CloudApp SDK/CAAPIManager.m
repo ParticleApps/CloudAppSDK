@@ -173,20 +173,20 @@ NSString *const bookmarkURLKey  = @"redirect_url";
 }
 
 - (void)fetchItemsAtPage:(NSInteger)page
-    numberOfItemsPerPage:(NSInteger)numberOfItems
-                    type:(CAItemType)type
-                 success:(void (^)())success
-                 failure:(void (^)(NSError *error))failure {
+        numberOfItemsPerPage:(NSInteger)numberOfItems
+                        type:(CAItemType)type
+                     success:(void (^)(NSArray<CAItem *> *items))success
+                     failure:(void (^)(NSError *error))failure {
     NSDictionary *parameters = @{kPage:@(page),kItemsPerPage:@(numberOfItems),kType:[CAItem apiValueForItemType:type]};
     [[CANetworkManager sharedInstance] getRequestWithURL:[CANetworkManager secureUrlWithExtension:itemsExtension parameters:parameters]
                                               completion:[self completionBlockForItemsWithSuccess:success failure:failure]];
 }
 
 - (void)fetchItemsAtPage:(NSInteger)page
-    numberOfItemsPerPage:(NSInteger)numberOfItems
-                  source:(NSString *)source
-                 success:(void (^)())success
-                 failure:(void (^)(NSError *error))failure {
+        numberOfItemsPerPage:(NSInteger)numberOfItems
+                      source:(NSString *)source
+                     success:(void (^)(NSArray<CAItem *> *items))success
+                     failure:(void (^)(NSError *error))failure {
     NSDictionary *parameters = @{kPage:@(page),kItemsPerPage:@(numberOfItems),kSource:source};
     [[CANetworkManager sharedInstance] getRequestWithURL:[CANetworkManager secureUrlWithExtension:itemsExtension parameters:parameters]
                                               completion:[self completionBlockForItemsWithSuccess:success failure:failure]];
