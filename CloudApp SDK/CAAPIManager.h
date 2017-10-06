@@ -27,22 +27,22 @@ extern NSString *const bookmarkURLKey;
 - (void)fetchItemsAtPage:(NSInteger)page
     numberOfItemsPerPage:(NSInteger)numberOfItems
                     type:(CAItemType)type
-                 success:(void (^)())success
+                 success:(void (^)(NSArray<CAItem *> *items))success
                  failure:(void (^)(NSError *error))failure;
 
 - (void)fetchItemsAtPage:(NSInteger)page
     numberOfItemsPerPage:(NSInteger)numberOfItems
                   source:(NSString *)source
-                 success:(void (^)())success
+                 success:(void (^)(NSArray<CAItem *> *items))success
                  failure:(void (^)(NSError *error))failure;
 
 - (void)fetchArchivedItemsAtPage:(NSInteger)page success:(void (^)(NSArray<CAItem *> *items))success failure:(void (^)(NSError *error))failure;
 
 - (void)fetchArchievedItemsAtPage:(NSInteger)page
-             numberOfItemsPerPage:(NSInteger)numberOfItems
-                             type:(CAItemType)type
-                          success:(void (^)(NSArray<CAItem *> *items))success
-                          failure:(void (^)(NSError *error))failure;
+     numberOfItemsPerPage:(NSInteger)numberOfItems
+                     type:(CAItemType)type
+                  success:(void (^)(NSArray<CAItem *> *items))success
+                  failure:(void (^)(NSError *error))failure;
 
 - (void)fetchItemFavoriteStatus:(CAItem *)item success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure;
 
