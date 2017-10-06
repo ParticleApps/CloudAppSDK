@@ -250,6 +250,8 @@ static NSString *const rootURL = @"http://my.cl.ly/";
         NSData   *data      = [NSData dataWithContentsOfFile:path];
         NSString *mimetype  = [self mimeTypeForPath:path];
         
+        assert(data != nil);
+        
         [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
         [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", fieldName, filename] dataUsingEncoding:NSUTF8StringEncoding]];
         [httpBody appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", mimetype] dataUsingEncoding:NSUTF8StringEncoding]];
