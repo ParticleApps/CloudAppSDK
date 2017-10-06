@@ -55,7 +55,7 @@
         return CAItemTypeAudio;
     }
     
-    return CAItemTypeUnkown;
+    return CAItemTypeUnknown;
 }
 
 + (NSString *)apiValueForItemType:(CAItemType)type {

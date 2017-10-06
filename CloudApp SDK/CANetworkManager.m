@@ -263,6 +263,13 @@ static NSString *const rootURL = @"http://my.cl.ly/";
 }
 
 - (void)multiPartPostRequestWithURL:(NSURL *)url body:(NSDictionary *)jsonBody path:(NSString *)path completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion {
+    //Check for valid file
+    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        NSLog(@"Error: no file exists at path, %@", path);
+        completion(nil,nil,nil);
+        return;
+    }
+    
     //Create Varaibles
     NSString *boundary           = [NSString stringWithFormat:@"Boundary-%@", [[NSUUID UUID] UUIDString]];
     NSString *contentType        = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
