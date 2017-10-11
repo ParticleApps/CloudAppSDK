@@ -64,7 +64,7 @@ extern NSString *const bookmarkURLKey;
 
 - (void)setItemExpiration:(CAItem *)item afterViews:(NSInteger)numberOfViews success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure;
 
-- (void)shareItem:(CAItem *)item with:(NSArray<NSString *> *)recipients message:(NSString *)message success:(void (^)())success failure:(void (^)(NSError *error))failure;
+- (void)shareItem:(CAItem *)item with:(NSArray<NSString *> *)recipients message:(NSString *)message success:(void (^)(void))success failure:(void (^)(NSError *error))failure;
 
 - (void)deleteItem:(CAItem *)item success:(void (^)(CAItem *item))success failure:(void (^)(NSError *error))failure;
 

@@ -132,7 +132,7 @@
                                               completion:[self completionBlockForNewUserWithSuccess:success failure:failure]];
 }
 
-- (void)requestPasswordReset:(NSString *)email success:(void (^)())success failure:(void (^)(NSError *error))failure {
+- (void)requestPasswordReset:(NSString *)email success:(void (^)(void))success failure:(void (^)(NSError *error))failure {
     [[CANetworkManager sharedInstance] postRequestWithURL:[CANetworkManager secureUrlWithExtension:resetPasswordExtension]
                                                      body:@{kUser:@{kEmail:email}}
                                                completion:[CANetworkManager completionBlockForEmptyResponse:success failure:failure]];

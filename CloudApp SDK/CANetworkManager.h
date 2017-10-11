@@ -52,6 +52,6 @@ extern NSString *const expirationExtension;
 
 - (void)multiPartPostRequestWithURL:(NSURL *)url body:(NSDictionary *)jsonBody path:(NSString *)path completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion;
 
-+ (void (^)(NSData *data, NSURLResponse *response, NSError *error))completionBlockForEmptyResponse:(void (^)())success failure:(void (^)(NSError *error))failure;
++ (void (^)(NSData *data, NSURLResponse *response, NSError *error))completionBlockForEmptyResponse:(void (^)(void))success failure:(void (^)(NSError *error))failure;
 
 @end

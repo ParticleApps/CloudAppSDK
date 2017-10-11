@@ -293,7 +293,7 @@ NSString *const bookmarkURLKey  = @"redirect_url";
                                                completion:[self completionBlockForItemExpirationUpdate:item success:success failure:failure]];
 }
 
-- (void)shareItem:(CAItem *)item with:(NSArray<NSString *> *)recipients message:(NSString *)message success:(void (^)())success failure:(void (^)(NSError *error))failure {
+- (void)shareItem:(CAItem *)item with:(NSArray<NSString *> *)recipients message:(NSString *)message success:(void (^)(void))success failure:(void (^)(NSError *error))failure {
     //NOTE: This URL uses slug for the id, while others follow the documentation and use id.
     NSURL *url = [[CANetworkManager secureUrlWithExtension:newItemExtension] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@/%@", item.slug, shareExtension]];
     [[CANetworkManager sharedInstance] postRequestWithURL:url

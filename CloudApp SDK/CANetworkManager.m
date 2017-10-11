@@ -286,7 +286,7 @@ static NSString *const rootURL = @"http://my.cl.ly/";
     [task resume];
 }
 
-+ (void (^)(NSData *data, NSURLResponse *response, NSError *error))completionBlockForEmptyResponse:(void (^)())success failure:(void (^)(NSError *error))failure {
++ (void (^)(NSData *data, NSURLResponse *response, NSError *error))completionBlockForEmptyResponse:(void (^)(void))success failure:(void (^)(NSError *error))failure {
     return ^(NSData *data, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (!error && success) {

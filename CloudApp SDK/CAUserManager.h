@@ -28,7 +28,7 @@
 
 - (void)validateExistingCredentials:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure;
 
-- (void)requestPasswordReset:(NSString *)email success:(void (^)())success failure:(void (^)(NSError *error))failure;
+- (void)requestPasswordReset:(NSString *)email success:(void (^)(void))success failure:(void (^)(NSError *error))failure;
 
 - (void)setHasPrivateItems:(BOOL)privateItems success:(void (^)(CAUser *user))success failure:(void (^)(NSError *error))failure;
 
