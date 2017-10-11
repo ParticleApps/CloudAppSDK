@@ -18,5 +18,3 @@ FOUNDATION_EXPORT const unsigned char CloudApp_SDKVersionString[];
 
 #import "CAUserManager.h"
 #import "CAAPIManager.h"
-
-

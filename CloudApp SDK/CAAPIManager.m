@@ -6,7 +6,7 @@
 //  Copyright © 2017 Rocco Del Priore. All rights reserved.
 //
 
-#import "NSDate+CAExtensions.h"
+#import "NSDate+CACatagories.h"
 
 #import "CAAPIManager.h"
 #import "CANetworkKeys.h"

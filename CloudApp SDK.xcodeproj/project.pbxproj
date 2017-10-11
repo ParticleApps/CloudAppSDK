@@ -16,8 +16,8 @@
 		84655E141F3E6F1D00D48AE3 /* CAUserManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 843630F01EB818F60067EE0A /* CAUserManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84655E151F3E6F2C00D48AE3 /* CAAPIManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 847F2D4E1EB870E0006707A5 /* CAAPIManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84655E161F3E6F3000D48AE3 /* CANetworkManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 847F2D491EB856EF006707A5 /* CANetworkManager.h */; };
-		84655E171F3E6F3500D48AE3 /* NSDate+CAExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 847F2D3D1EB849C7006707A5 /* NSDate+CAExtensions.h */; };
-		84655E181F3E6F3800D48AE3 /* NSDate+CAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 847F2D3E1EB849C7006707A5 /* NSDate+CAExtensions.m */; };
+		84655E171F3E6F3500D48AE3 /* NSDate+CACatagories.h in Headers */ = {isa = PBXBuildFile; fileRef = 847F2D3D1EB849C7006707A5 /* NSDate+CACatagories.h */; };
+		84655E181F3E6F3800D48AE3 /* NSDate+CACatagories.m in Sources */ = {isa = PBXBuildFile; fileRef = 847F2D3E1EB849C7006707A5 /* NSDate+CACatagories.m */; };
 		84655E191F3E6F3F00D48AE3 /* CAUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 843630F11EB818F60067EE0A /* CAUserManager.m */; };
 		84655E1A1F3E6F3F00D48AE3 /* CAAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 847F2D4F1EB870E0006707A5 /* CAAPIManager.m */; };
 		84655E1B1F3E6F3F00D48AE3 /* CANetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 847F2D4A1EB856EF006707A5 /* CANetworkManager.m */; };
@@ -33,8 +33,8 @@
 		847F2D351EB83B02006707A5 /* CAUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 847F2D331EB83B02006707A5 /* CAUser.m */; };
 		847F2D381EB83B42006707A5 /* CAObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 847F2D361EB83B42006707A5 /* CAObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		847F2D391EB83B42006707A5 /* CAObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 847F2D371EB83B42006707A5 /* CAObject.m */; };
-		847F2D3F1EB849C7006707A5 /* NSDate+CAExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 847F2D3D1EB849C7006707A5 /* NSDate+CAExtensions.h */; };
-		847F2D401EB849C7006707A5 /* NSDate+CAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 847F2D3E1EB849C7006707A5 /* NSDate+CAExtensions.m */; };
+		847F2D3F1EB849C7006707A5 /* NSDate+CACatagories.h in Headers */ = {isa = PBXBuildFile; fileRef = 847F2D3D1EB849C7006707A5 /* NSDate+CACatagories.h */; };
+		847F2D401EB849C7006707A5 /* NSDate+CACatagories.m in Sources */ = {isa = PBXBuildFile; fileRef = 847F2D3E1EB849C7006707A5 /* NSDate+CACatagories.m */; };
 		847F2D4B1EB856EF006707A5 /* CANetworkManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 847F2D491EB856EF006707A5 /* CANetworkManager.h */; };
 		847F2D4C1EB856EF006707A5 /* CANetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 847F2D4A1EB856EF006707A5 /* CANetworkManager.m */; };
 		847F2D501EB870E0006707A5 /* CAAPIManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 847F2D4E1EB870E0006707A5 /* CAAPIManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -58,8 +58,8 @@
 		847F2D361EB83B42006707A5 /* CAObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAObject.h; sourceTree = "<group>"; };
 		847F2D371EB83B42006707A5 /* CAObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAObject.m; sourceTree = "<group>"; };
 		847F2D3B1EB83CD8006707A5 /* CANetworkKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CANetworkKeys.h; sourceTree = "<group>"; };
-		847F2D3D1EB849C7006707A5 /* NSDate+CAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+CAExtensions.h"; sourceTree = "<group>"; };
-		847F2D3E1EB849C7006707A5 /* NSDate+CAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CAExtensions.m"; sourceTree = "<group>"; };
+		847F2D3D1EB849C7006707A5 /* NSDate+CACatagories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+CACatagories.h"; sourceTree = "<group>"; };
+		847F2D3E1EB849C7006707A5 /* NSDate+CACatagories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CACatagories.m"; sourceTree = "<group>"; };
 		847F2D421EB84E7D006707A5 /* CAObjectPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CAObjectPrivate.h; sourceTree = "<group>"; };
 		847F2D431EB84EC2006707A5 /* CAUserPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CAUserPrivate.h; sourceTree = "<group>"; };
 		847F2D491EB856EF006707A5 /* CANetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CANetworkManager.h; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 		843630BE1EB806FF0067EE0A /* CloudApp SDK */ = {
 			isa = PBXGroup;
 			children = (
-				847F2D411EB849DC006707A5 /* Extensions */,
+				847F2D411EB849DC006707A5 /* Catagories */,
 				847F2D3C1EB83CE4006707A5 /* Managers */,
 				847F2D3A1EB83B46006707A5 /* Models */,
 				84655E281F3E703600D48AE3 /* Objects */,
@@ -166,13 +166,13 @@
 			name = Managers;
 			sourceTree = "<group>";
 		};
-		847F2D411EB849DC006707A5 /* Extensions */ = {
+		847F2D411EB849DC006707A5 /* Catagories */ = {
 			isa = PBXGroup;
 			children = (
-				847F2D3D1EB849C7006707A5 /* NSDate+CAExtensions.h */,
-				847F2D3E1EB849C7006707A5 /* NSDate+CAExtensions.m */,
+				847F2D3D1EB849C7006707A5 /* NSDate+CACatagories.h */,
+				847F2D3E1EB849C7006707A5 /* NSDate+CACatagories.m */,
 			);
-			name = Extensions;
+			name = Catagories;
 			sourceTree = "<group>";
 		};
 		847F2D4D1EB85A6A006707A5 /* Supporting Files */ = {
@@ -199,7 +199,7 @@
 				843630F21EB818F60067EE0A /* CAUserManager.h in Headers */,
 				847F2D381EB83B42006707A5 /* CAObject.h in Headers */,
 				847F2D501EB870E0006707A5 /* CAAPIManager.h in Headers */,
-				847F2D3F1EB849C7006707A5 /* NSDate+CAExtensions.h in Headers */,
+				847F2D3F1EB849C7006707A5 /* NSDate+CACatagories.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,7 +215,7 @@
 				84655DC91F3E6D0400D48AE3 /* CloudAppSDK.h in Headers */,
 				84655E201F3E6F5C00D48AE3 /* CAUser.h in Headers */,
 				84655E141F3E6F1D00D48AE3 /* CAUserManager.h in Headers */,
-				84655E171F3E6F3500D48AE3 /* NSDate+CAExtensions.h in Headers */,
+				84655E171F3E6F3500D48AE3 /* NSDate+CACatagories.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,7 +323,7 @@
 				847F2D551EB87291006707A5 /* CAItem.m in Sources */,
 				847F2D4C1EB856EF006707A5 /* CANetworkManager.m in Sources */,
 				843630F31EB818F60067EE0A /* CAUserManager.m in Sources */,
-				847F2D401EB849C7006707A5 /* NSDate+CAExtensions.m in Sources */,
+				847F2D401EB849C7006707A5 /* NSDate+CACatagories.m in Sources */,
 				847F2D511EB870E0006707A5 /* CAAPIManager.m in Sources */,
 				847F2D391EB83B42006707A5 /* CAObject.m in Sources */,
 				843B5FBB1EB9BDE800E01EEF /* CAUploader.m in Sources */,
@@ -340,7 +340,7 @@
 				84655E1B1F3E6F3F00D48AE3 /* CANetworkManager.m in Sources */,
 				84655E1F1F3E6F5700D48AE3 /* CAObject.m in Sources */,
 				84655E211F3E6F6000D48AE3 /* CAUser.m in Sources */,
-				84655E181F3E6F3800D48AE3 /* NSDate+CAExtensions.m in Sources */,
+				84655E181F3E6F3800D48AE3 /* NSDate+CACatagories.m in Sources */,
 				84655E271F3E701E00D48AE3 /* CAUploader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

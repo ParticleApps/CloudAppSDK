@@ -6,9 +6,9 @@
 //  Copyright © 2017 Rocco Del Priore. All rights reserved.
 //
 
-#import "NSDate+CAExtensions.h"
+#import "NSDate+CACatagories.h"
 
-@implementation NSDate (CAExtensions)
+@implementation NSDate (CACatagories)
 
 //Shamelessly stolen from Sam Soffes
 + (NSDate *)dateFromISO8601String:(NSString *)iso8601 {

@@ -9,7 +9,7 @@
 #import "CANetworkKeys.h"
 #import "CAUserPrivate.h"
 #import "CAObjectPrivate.h"
-#import "NSDate+CAExtensions.h"
+#import "NSDate+CACatagories.h"
 
 @interface CAUser ()
 @property (nonatomic) NSString *email;

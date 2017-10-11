@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSDate (CAExtensions)
+@interface NSDate (CACatagories)
 
 + (NSDate *)dateFromISO8601String:(NSString *)iso8601String;
 

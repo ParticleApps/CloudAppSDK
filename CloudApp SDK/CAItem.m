@@ -10,7 +10,7 @@
 #import "CANetworkKeys.h"
 #import "CAItemPrivate.h"
 #import "CAObjectPrivate.h"
-#import "NSDate+CAExtensions.h"
+#import "NSDate+CACatagories.h"
 
 @interface CAItem ()
 @property (nonatomic) NSNumber *contentSize;
